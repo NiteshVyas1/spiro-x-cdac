@@ -4,6 +4,7 @@ import {
   FaHistory, FaHeart, FaCode, FaComments 
 } from "react-icons/fa";
 
+
 const Searchbar = () => {
 
     const [searchQuery, setSearchQuery] = useState("");
@@ -25,7 +26,7 @@ const Searchbar = () => {
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             placeholder="What are you searching for?"
-            className="w-full outline-none px-3"
+            className="w-full outline-none px-3 rounded-lg"
           />
           <button className="p-2"><FaSearch /></button>
           <button onClick={handleVoiceSearch} className="p-2"><FaMicrophone /></button>

@@ -1,9 +1,11 @@
 import c from "./c.png";
 import python from "./python.png";
+import spiro from "./spiro.png";
 
 export const assets = {
   c,
   python,
+  spiro,
 };
 
 export const courses = [

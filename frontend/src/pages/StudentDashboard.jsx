@@ -1,11 +1,13 @@
 import React, { useState } from "react";
 import Sidebar from "../components/Sidebar";
-import Searchbar from "../components/Searchbar";
 import CourseItem from "../components/CourseItem";
-import { courses } from "../assets/assets";
+import { assets, courses } from "../assets/assets";
+import TopBar from "../components/TopBar";
 
 const StudentDashboard = () => {
   return (
+    <div>
+    <TopBar/>
     <div className="flex min-h-screen bg-gray-100">
       {/* SideBar Component */}
 
@@ -13,10 +15,8 @@ const StudentDashboard = () => {
 
       {/* Main Content */}
       <div className="flex-1 p-5">
-        {/* Search Component */}
-        <Searchbar />
         {/* Greeting */}
-        <div className="bg-blue-600 text-white p-6 rounded-lg mt-6 shadow-lg text-center">
+        <div className="bg-blue-600 text-white p-9 rounded-lg mt-6 shadow-lg ">
           <h2 className="text-xl font-semibold">Welcome, Student </h2>
           <p>Announcement: new course update</p>
           <button className="mt-2 px-4 py-2 bg-white text-blue-600 rounded-lg">
@@ -34,7 +34,7 @@ const StudentDashboard = () => {
                 className="bg-white rounded-lg shadow-md overflow-hidden"
               >
                 <img
-                  src="https://via.placeholder.com/300"
+                  src={assets.c}
                   alt="Course"
                   className="w-full"
                 />
@@ -100,7 +100,7 @@ const StudentDashboard = () => {
                 className="bg-white rounded-lg shadow-md overflow-hidden"
               >
                 <img
-                  src="https://via.placeholder.com/300"
+                  src={assets.c}
                   alt={course}
                   className="w-full"
                 />
@@ -115,6 +115,7 @@ const StudentDashboard = () => {
           </div>
         </div>
       </div>
+    </div>
     </div>
   );
 };
