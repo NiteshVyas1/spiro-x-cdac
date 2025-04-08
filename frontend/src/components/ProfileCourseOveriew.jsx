@@ -16,11 +16,11 @@ const ProfileCourseOveriew = () => {
       <h2 className="text-lg font-semibold">Course Status</h2>
       <button className="text-sm text-blue-600">See all</button>
     </div>
-    <div className="flex space-x-4 overflow-x-auto">
+    <div className="flex space-x-4 overflow-x-auto w-full">
       {courses.map((course, index) => (
-        <div key={index} className="flex items-center space-x-2 border px-4 py-2 rounded-lg shadow-sm bg-gray-50">
+        <div key={index} className="flex items-center space-x-2 border px-4 py-2 rounded-lg shadow-sm bg-gray-50 w-full">
           {course.icon}
-          <div>
+          <div> 
             <p className="text-sm font-medium">{course.name}</p>
             <p className="text-xs text-gray-500">{course.progress}%</p>
           </div>

@@ -1,123 +1,78 @@
-import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import { toast } from 'react-toastify';
+import React, { useState } from "react";
+import { FaEye, FaEyeSlash } from "react-icons/fa";
+import { Link, Links } from "react-router-dom";
 
 const Login = () => {
-  const [authMode, setAuthMode] = useState('login');
-  const navigate = useNavigate();
-  
-  // Mock user database (in a real app, this would be in your backend)
-  const mockUsers = [
-    { name: 'Test User', email: 'test@example.com', password: 'password123' }
-  ];
-
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    password: ''
-  });
-
-  const onChangeHandler = (e) => {
-    setFormData({...formData, [e.target.name]: e.target.value});
-  }
-
-  const onSubmitHandler = (event) => {
-    event.preventDefault();
-    
-    // Frontend-only validation
-    if (!formData.email || !formData.password) {
-      toast.error('Please fill in all fields');
-      return;
-    }
-
-    if (authMode === 'signup') {
-      // Mock signup - just store in localStorage
-      const newUser = {
-        name: formData.name,
-        email: formData.email,
-        password: formData.password // In real app, NEVER store plain passwords
-      };
-      
-      localStorage.setItem('user', JSON.stringify(newUser));
-      toast.success('Account created successfully!');
-      navigate('/');
-    } else {
-      // Mock login - check against our mock user
-      const user = mockUsers.find(u => u.email === formData.email && u.password === formData.password);
-      
-      if (user) {
-        localStorage.setItem('isAuthenticated', 'true');
-        localStorage.setItem('userEmail', formData.email);
-        toast.success('Logged in successfully!');
-        navigate('/');
-      } else {
-        toast.error('Invalid email or password');
-      }
-    }
-  }
+  const [showPassword, setShowPassword] = useState(false);
 
   return (
-    <form onSubmit={onSubmitHandler} className='flex flex-col items-center w-[90%] sm:max-w-96 m-auto mt-14 gap-4 text-gray-800'>
-      <div className='inline-flex items-center gap-2 mb-2 mt-10'>
-        <p className='prata-regular text-3xl'>
-          {authMode === 'login' ? 'Login' : 'Sign Up'}
-        </p>
-        <hr className='border-none h-[1.5px] w-8 bg-gray-800'/>
+    <div className="flex min-h-screen">
+      {/* Left side (blue/purple panel) */}
+      <div className="w-[40%] bg-indigo-800"></div>
+
+      {/* Right side (login form) */}
+      <div className="w-[60%] flex items-center justify-center bg-white">
+        <div className="w-full max-w-sm px-6">
+          <h2 className="text-2xl font-bold text-center mb-6">Login</h2>
+
+          <form className="space-y-5">
+            {/* Username */}
+            <div>
+              <label className="text-sm font-medium block mb-1">
+                User name *
+              </label>
+              <input
+                type="email"
+                placeholder="abc@gmail.com"
+                className="w-full border border-gray-300 px-3 py-2 rounded-md outline-none focus:ring-2 focus:ring-blue-500"
+              />
+            </div>
+
+            {/* Password */}
+            <div>
+              <label className="text-sm font-medium block mb-1">
+                Password *
+              </label>
+              <div className="relative">
+                <input
+                  type={showPassword ? "text" : "password"}
+                  placeholder="abc@gmail.com"
+                  className="w-full border border-gray-300 px-3 py-2 rounded-md pr-10 outline-none focus:ring-2 focus:ring-blue-500"
+                />
+                <span
+                  className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500 cursor-pointer"
+                  onClick={() => setShowPassword(!showPassword)}
+                >
+                  {showPassword ? <FaEyeSlash /> : <FaEye />}
+                </span>
+              </div>
+              <Link to="/login/ResetPassword">
+                <div className="text-right text-sm mt-1 text-blue-600 hover:underline cursor-pointer">
+                  Forgot password?
+                </div>
+              </Link>
+            </div>
+
+            {/* Login Button */}
+            <button
+              type="button"
+              className="w-full bg-blue-600 text-white py-2 rounded-md hover:bg-blue-700 transition"
+            >
+              Login
+            </button>
+
+            {/* Create account */}
+            <p className="text-sm text-center">
+              Don’t have an account?{" "}
+              <Link to="/Signup" className="text-blue-600">
+                Create an account
+              </Link>
+            </p>
+          </form>
+        </div>
       </div>
-      
-      {authMode === 'signup' && (
-        <input 
-          name="name"
-          onChange={onChangeHandler} 
-          value={formData.name} 
-          type='text' 
-          className='w-full px-3 py-2 border border-gray-800' 
-          placeholder='Name' 
-          required
-        />
-      )}
-      
-      <input  
-        name="email"
-        onChange={onChangeHandler} 
-        value={formData.email} 
-        type='email' 
-        className='w-full px-3 py-2 border border-gray-800' 
-        placeholder='Email' 
-        required
-      />
-      
-      <input  
-        name="password"
-        onChange={onChangeHandler} 
-        value={formData.password} 
-        type='password' 
-        className='w-full px-3 py-2 border border-gray-800' 
-        placeholder='Password' 
-        required
-        minLength={6}
-      />
-      
-      <div className='w-full flex justify-between text-sm mt-[-8px]'>
-        <Link to="/forgot-password" className='cursor-pointer hover:underline'>
-          Forgot your password?
-        </Link>
-        {authMode === 'login' ? (
-          <button type="button" onClick={() => setAuthMode('signup')} className='cursor-pointer hover:underline'>
-            Create Account
-          </button>
-        ) : (
-          <button type="button" onClick={() => setAuthMode('login')} className='cursor-pointer hover:underline'>
-            Login Here
-          </button>
-        )}
-      </div>
-      
-      <button type="submit" className='bg-black text-white font-light px-8 py-2 mt-4 hover:bg-gray-800 transition'>
-        {authMode === 'login' ? 'Sign In' : 'Sign Up'}
-      </button>
-    </form>
-  )
-}
+    </div>
+  );
+};
 
 export default Login;

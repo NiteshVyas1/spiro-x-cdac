@@ -6,9 +6,9 @@ import TopBar from "../components/TopBar";
 
 const StudentDashboard = () => {
   return (
-    <div>
+    <div >
     <TopBar/>
-    <div className="flex min-h-screen bg-gray-100">
+    <div className="flex min-h-screen bg-white">
       {/* SideBar Component */}
 
       <Sidebar />
@@ -19,7 +19,8 @@ const StudentDashboard = () => {
         <div className="bg-blue-600 text-white p-9 rounded-lg mt-6 shadow-lg ">
           <h2 className="text-xl font-semibold">Welcome, Student </h2>
           <p>Announcement: new course update</p>
-          <button className="mt-2 px-4 py-2 bg-white text-blue-600 rounded-lg">
+          <button className="mt-2 px-4 py-2 bg-blue-600 text-white border border-white rounded-lg hover:bg-white hover:text-blue-600 transition duration-300">
+
             View Details
           </button>
         </div>
