@@ -1,14 +1,83 @@
-const RecommendationCard = ({ title, description, tag, badge }) => (
-    <div className="bg-white rounded-lg border border-gray-200 overflow-hidden hover:shadow-md transition-shadow">
-      <div className="p-4">
-        <h3 className="font-bold text-lg mb-2">{title}</h3>
-        <p className="text-gray-600 text-sm mb-3">{description}</p>
-        <div className="flex items-center">
-          <span className="text-blue-500 text-sm font-medium mr-3">{tag}</span>
-          <span className="bg-green-100 text-green-800 text-xs px-2 py-1 rounded">{badge}</span>
-        </div>
+import React from "react";
+import { toast } from "react-toastify";
+import { useCart } from "../context/CartContext";
+import { assets } from "../assets/assets";
+
+const recommendations = [
+  {
+    name: "Java",
+    image: assets.java,
+    price: "₹1999",
+    rating: 4.5,
+  },
+  {
+    name: "Web Development",
+    image: assets.web,
+    price: "₹1599",
+    rating: 4.0,
+  },
+  {
+    name: "Generative AI",
+    image: assets.genAI,
+    price: "₹1799",
+    rating: 4.7,
+  },
+];
+
+const RecommendationCard = () => {
+  const { addToCart } = useCart();
+
+  const handleBuy = (course) => {
+    addToCart(course);
+    toast.success(`${course.name} course added to cart!`);
+  };
+
+  return (
+    <section className="mt-12">
+      <h3 className="text-xl font-semibold mb-6 text-gray-800">
+        Recommended Courses For You!
+      </h3>
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+        {recommendations.map((course, index) => (
+          <div
+            key={index}
+            className="rounded-lg border border-gray-200 shadow-lg w-full mx-auto overflow-hidden"
+          >
+            <img
+              src={course.image}
+              alt={course.name}
+              className="w-full h-48 object-cover"
+            />
+            <div className="p-4">
+              <h4 className="font-bold text-lg">{course.name}</h4>
+              <p className="text-sm text-gray-600">
+                By Chembur Computer Institute
+              </p>
+              <div className="flex items-center mt-1">
+                {[...Array(5)].map((_, i) => (
+                  <span key={i} className="text-yellow-500 text-lg">
+                    {i < Math.floor(course.rating) ? "★" : "☆"}
+                  </span>
+                ))}
+                <span className="text-sm text-gray-600 ml-2">
+                  ({course.rating})
+                </span>
+              </div>
+              <p className="text-gray-800 font-semibold mt-1">
+                {course.price}
+              </p>
+              <button
+                className="text-xs bg-blue-500 text-white px-3 py-1 rounded mt-2 hover:bg-blue-600 cursor-pointer"
+                onClick={() => handleBuy(course)}
+              >
+                Add To Cart
+              </button>
+            </div>
+          </div>
+        ))}
       </div>
-    </div>
+    </section>
   );
-  
-  export default RecommendationCard;
+};
+
+export default RecommendationCard;

@@ -1,11 +1,19 @@
 import c from "./c.png";
 import python from "./python.png";
 import spiro from "./spiro.png";
+import java from "./java.png";
+import web from "./web.png";
+import genAI from "./genAI.png";
+import online_learning from "./online_learning_gif.gif";
 
 export const assets = {
   c,
   python,
   spiro,
+  java,
+  web,
+  genAI,
+  online_learning
 };
 
 export const courses = [
@@ -23,4 +31,12 @@ export const courses = [
       "Python is a high-level, interpreted, general-purpose programming language. It was created by Guido van Rossum and first released in 1991.",
     image: [python],
   },
+  {
+    _id: "Java",
+    name: "Java",
+    description:
+      "Java is a multi-platform, object-oriented, and network-centric language that can be used as a platform in itself. It is a high-level programming language developed by Sun Microsystems.",
+    image: [java],
+  },
+  
 ];
