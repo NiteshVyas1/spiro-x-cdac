@@ -6,6 +6,7 @@ import { assets, courses } from "../assets/assets";
 import VideoCard from '../components/VideoCard';
 import RecommendationCard from '../components/RecommendationCard';
 import courseVideos from "../assets/courseVideos";
+import { FaHeart } from "react-icons/fa";
 
 const CoursePage = () => {
   const { id } = useParams();
@@ -41,12 +42,13 @@ const CoursePage = () => {
               level={video.level}
               onClick={() => handleVideoClick(video.id)}
             />
+            
           ))}
         </div>
+
       </section>
 
-      {/* Recommendations */}
-      
+      {/* Recommendations */}   
       <RecommendationCard />
     </div>
   );

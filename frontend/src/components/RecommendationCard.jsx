@@ -1,7 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 import { toast } from "react-toastify";
 import { useCart } from "../context/CartContext";
-import { assets } from "../assets/assets";
+import { assets, courses } from "../assets/assets";
 
 const recommendations = [
   {
@@ -22,23 +22,51 @@ const recommendations = [
     price: "₹1799",
     rating: 4.7,
   },
+  {
+    name: "C Programming",
+    image: assets.c,
+    price: "₹1299",
+    rating: 4.9,
+  },
 ];
 
 const RecommendationCard = () => {
   const { addToCart } = useCart();
+  const [showAll, setShowAll] = useState(false);
+
+  const visibleRecommendations = showAll ? recommendations : recommendations.slice(0, 3);
+
+  // const handleBuy = (course) => {
+  //   addToCart(course);
+  //   toast.success(`${course.name} course added to cart!`);
+  // };
 
   const handleBuy = (course) => {
-    addToCart(course);
-    toast.success(`${course.name} course added to cart!`);
+    const fullCourse = courses.find((c) => c.name === course.name);
+    if (fullCourse) {
+      addToCart(fullCourse);
+      toast.success(`${fullCourse.name} course added to cart!`);
+    } else {
+      toast.error("Course not found in list.");
+    }
   };
 
   return (
     <section className="mt-12">
-      <h3 className="text-xl font-semibold mb-6 text-gray-800">
-        Recommended Courses For You!
-      </h3>
+  <div className="flex justify-between items-center mb-6">
+    <h3 className="text-xl font-semibold text-gray-800">Popular Courses For You!</h3>
+    {recommendations.length > 3 && (
+      <button
+        className="text-lg text-gray-900 hover:text-blue-700"
+        onClick={() => setShowAll(!showAll)}
+      >
+        {showAll ? "View Less" : "View All >"}
+      </button>
+    )}
+  </div>
+
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-        {recommendations.map((course, index) => (
+        {visibleRecommendations.map((course, index) => (
           <div
             key={index}
             className="rounded-lg border border-gray-200 shadow-lg w-full mx-auto overflow-hidden"
@@ -63,9 +91,7 @@ const RecommendationCard = () => {
                   ({course.rating})
                 </span>
               </div>
-              <p className="text-gray-800 font-semibold mt-1">
-                {course.price}
-              </p>
+              <p className="text-gray-800 font-semibold mt-1">{course.price}</p>
               <button
                 className="text-xs bg-blue-500 text-white px-3 py-1 rounded mt-2 hover:bg-blue-600 cursor-pointer"
                 onClick={() => handleBuy(course)}

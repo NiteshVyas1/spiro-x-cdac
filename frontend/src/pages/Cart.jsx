@@ -3,13 +3,17 @@ import { useCart } from '../context/CartContext';
 import { toast } from 'react-toastify';
 
 const Cart = () => {
-  const { cartItems, removeFromCart } = useCart(); // Access cart data and functions
+  const { cartItems, removeFromCart , clearCart , purchaseCourses} = useCart(); // Access cart data and functions
 
   const handlePlaceOrder = () => {
     if (cartItems.length > 0) {
       cartItems.forEach(item =>
-        toast.success(`${item.name} course purchased!`)
+        toast.success(`${item.name} course added to My Courses successfully!`)
       );
+      purchaseCourses(cartItems);
+      // clearCart(); // Clear the cart after placing the order
+    } else{
+      toast.error("Your cart is empty! Please add items to your cart before placing an order.");
     }
   };
 
@@ -36,7 +40,7 @@ const Cart = () => {
                 <p className="text-sm text-gray-800 mb-2">
                   By Chembur Computer Institute
                 </p>
-                <p className="text-sm text-gray-800 mb-2">Price: ₹4999</p>
+                <p className="text-sm text-gray-800 mb-2">Price:{item.price} </p>
                 <button
                   onClick={() => removeFromCart(item.name)}
                   className="bg-red-500 text-white px-3 py-1 rounded hover:bg-red-600 text-xs cursor-pointer"

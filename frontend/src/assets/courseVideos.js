@@ -22,7 +22,7 @@ const courseVideos = {
       videoUrl: '/videos/c-pointers.mp4',
     },
   ],
-  python: [
+  Python: [
     {
       id: 'python-intro',
       title: '1. Python Basics',
@@ -42,7 +42,7 @@ const courseVideos = {
       videoUrl: '/videos/python-functions.mp4',
     },
   ],
-  java: [
+  Java: [
     {
       id: 'java-intro',
       title: '1. Introduction to Java',

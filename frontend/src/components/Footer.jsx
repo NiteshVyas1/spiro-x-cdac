@@ -12,7 +12,7 @@ const Footer = () => {
             alt="spiro logo"
             className="h-20 w-40 bg"
           />
-        </div>
+        </div>\\\
 
         {/* Footer Columns */}
         <div className="grid grid-cols-2 md:grid-cols-3 gap-10 text-sm">

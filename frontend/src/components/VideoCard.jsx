@@ -1,4 +1,5 @@
 import { PlayCircleIcon } from "lucide-react";
+import { FaHeart } from "react-icons/fa";
 
 
 const VideoCard = ({ thumbnail, title, description, duration, level, onClick }) => {
@@ -16,6 +17,11 @@ const VideoCard = ({ thumbnail, title, description, duration, level, onClick }) 
         {/* Play button on hover */}
         <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition duration-300 ">
           <PlayCircleIcon className="text-white w-15 h-15" />
+        </div>
+        
+        {/* Heart icon top-right */}
+        <div className="absolute top-2 right-2 text-gray-600 hover:text-red-500 z-10">
+          <FaHeart className="text-xl" />
         </div>
         </div>
 

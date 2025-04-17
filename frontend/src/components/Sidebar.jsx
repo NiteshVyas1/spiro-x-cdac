@@ -1,12 +1,17 @@
-
-import { 
-    FaSearch, FaMicrophone, FaHome, FaTrophy, FaShoppingCart, 
-    FaHistory, FaHeart, FaCode, FaComments 
-  } from "react-icons/fa";
-import { useNavigate , useLocation, Link } from 'react-router-dom';
+import {
+  FaSearch,
+  FaMicrophone,
+  FaHome,
+  FaTrophy,
+  FaShoppingCart,
+  FaHistory,
+  FaHeart,
+  FaCode,
+  FaComments,
+  FaPlay,
+} from "react-icons/fa";
+import { useNavigate, useLocation, Link } from "react-router-dom";
 import { useCart } from "../context/CartContext";
-
-
 
 const Sidebar = () => {
   const navigate = useNavigate();
@@ -25,6 +30,22 @@ const Sidebar = () => {
         >
           <Link to="/" className="flex items-center gap-2 w-full h-full">
             <FaHome /> <span>Home</span>
+          </Link>
+        </li>
+
+        <li
+          className={`flex items-center space-x-3 cursor-pointer hover:text-blue-600
+            ${
+              location.pathname === "/mycourses"
+                ? "underline font-semibold text-blue-600"
+                : ""
+            }`}
+        >
+          <Link
+            to="/mycourses"
+            className="flex items-center gap-2 w-full h-full"
+          >
+            <FaPlay /> <span>My Courses</span>
           </Link>
         </li>
 
@@ -57,24 +78,19 @@ const Sidebar = () => {
           </Link>
         </li>
 
-        <li className="flex items-center space-x-3 cursor-pointer hover:text-blue-600">
-          <FaHeart /> <span>Watchlist</span>
+        <li
+          className={`flex items-center space-x-3 cursor-pointer hover:text-blue-600
+            ${
+              location.pathname === "/watchlist"
+                ? "underline font-semibold text-blue-600"
+                : ""
+            }`}
+        >
+          <Link to="/watchlist" className="flex items-center gap-2 w-full h-full">
+            <FaHeart /> <span>Watchlist</span>
+          </Link>
         </li>
 
-        {/* <li
-          className={`flex items-center space-x-3 cursor-pointer hover:text-blue-600
-            ${location.pathname === "/cart"
-              ? "bg-blue-200 rounded font-semibold pl-1"
-              : ""}`}
-        ><Link to="/cart" className="flex items-center gap-2 w-full h-full">
-           <FaShoppingCart /> <span>Cart</span>
-           {cartItems.length > 0 && (
-              <span className=" bg-blue-400 text-black text-xs px-2 py-0.5 rounded-full">
-                {cartItems.length}
-              </span>
-            )}
-          </Link>
-        </li> */}
 
         <li className="flex items-center space-x-3 cursor-pointer hover:text-blue-600">
           <FaTrophy /> <span>Achievements</span>
@@ -90,8 +106,6 @@ const Sidebar = () => {
       </ul>
     </div>
   );
+};
 
-}
-
-export default Sidebar
-
+export default Sidebar;

@@ -38,5 +38,19 @@ export const courses = [
       "Java is a multi-platform, object-oriented, and network-centric language that can be used as a platform in itself. It is a high-level programming language developed by Sun Microsystems.",
     image: [java],
   },
+  {
+    _id: "Web",
+    name: "Web Development",
+    description:
+      "Web development is the work involved in developing a website for the Internet or an intranet. It can range from developing a simple single static page of plain text to complex web applications, electronic businesses, and social network services.",
+    image: [web],
+  },
+  {
+    _id: "GenAI",
+    name: "Generative AI",
+    description:
+      "Generative AI refers to algorithms that can generate new content, including text, images, audio, and video, based on training data. It encompasses various techniques such as deep learning and neural networks.",
+    image: [genAI],
+  },
   
 ];
