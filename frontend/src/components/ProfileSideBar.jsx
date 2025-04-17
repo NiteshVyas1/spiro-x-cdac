@@ -1,31 +1,30 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Github, Mail, Linkedin } from "lucide-react";
+import { ShopContext } from "../context/ShopContext";
 
 const ProfileSideBar = () => {
-  return (
-    <div className="w-1/5 bg-white rounded-lg shadow p-4 flex flex-col items-center space-y-4 ml-20 mb-25">
-      <div className="w-40 h-40 bg-gray-200 rounded-full" />
-      <h2 className="text-xl font-bold">Vedangi Mhatre</h2>
-      <button className="text-sm text-blue-600">
-        Update profile visibility
-      </button>
+  const { userEmail, userName, userInitial, userGithub, userLinkedin } = useContext(ShopContext);
 
+  return (
+    <div className="w-1/5 bg-white rounded-lg shadow p-4 flex flex-col items-center space-y-4 ml-20 ">
+      <div className="w-40 h-40 bg-blue-600 rounded-full flex items-center justify-center text-4xl font-semibold text-white">
+        {userInitial || userName.charAt(0).toUpperCase()} {/* Fallback to the first letter of the name */}
+      </div>
+
+      <h2 className="text-xl font-bold">{userName}</h2>
+     
       <div className="flex flex-col space-y-2 mt-14">
         <div className="flex items-center space-x-2 text-sm">
           <Github className="w-4 h-4" />
-          <span>vedangi</span>
+          <span>{userGithub || "GitHub Username"}</span> {/* Use dynamic GitHub username */}
         </div>
         <div className="flex items-center space-x-2 text-sm">
           <Mail className="w-4 h-4" />
-          <span>vedangi@gmail.com</span>
-        </div>
-        <div className="flex items-center space-x-2 text-sm">
-          <Mail className="w-4 h-4" />
-          <span>vedanji@gmail.com</span>
+          <span>{userEmail}</span>
         </div>
         <div className="flex items-center space-x-2 text-sm">
           <Linkedin className="w-4 h-4" />
-          <span>vedangi</span>
+          <span>{userLinkedin || "LinkedIn Username"}</span> {/* Use dynamic LinkedIn username */}
         </div>
       </div>
     </div>
