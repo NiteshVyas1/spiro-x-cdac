@@ -3,9 +3,17 @@ import Sidebar from "../components/Sidebar";
 import CourseItem from "../components/CourseItem";
 import { assets, courses } from "../assets/assets";
 import TopBar from "../components/TopBar";
+import { useContext } from 'react';
+import { ShopContext } from "../context/ShopContext";
+
 
 const StudentDashboard = () => {
+
+  const { userName } = useContext(ShopContext);
+
   return (
+
+    
     <div >
     <TopBar/>
     <div className="flex min-h-screen bg-white">
@@ -17,7 +25,7 @@ const StudentDashboard = () => {
       <div className="flex-1 p-5">
         {/* Greeting */}
         <div className="bg-blue-600 text-white p-9 rounded-lg mt-6 shadow-lg ">
-          <h2 className="text-xl font-semibold">Welcome, Student </h2>
+          <h2 className="text-xl font-semibold">Welcome, {userName || "Student"} </h2>
           <p>Announcement: new course update</p>
           <button className="mt-2 px-4 py-2 bg-blue-600 text-white border border-white rounded-lg hover:bg-white hover:text-blue-600 transition duration-300">
 
