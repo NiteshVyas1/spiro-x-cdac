@@ -5,11 +5,13 @@ import { Link } from "react-router-dom";
 import { ShopContext } from "../context/ShopContext";
 import Searchbar from "../components/Searchbar";
 import { assets } from "../assets/assets";
+import { useCart } from "../context/CartContext";
 
 const TopBar = () => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const dropdownRef = useRef(null);
-  const { userName, userEmail, userInitial, cartItems } = useContext(ShopContext); // ✅ Added cartItems
+  const { userName, userEmail, userInitial } = useContext(ShopContext); // ✅ Added cartItems
+  const { cartItems } = useCart(); // ✅ Added
 
   useEffect(() => {
     function handleClickOutside(event) {

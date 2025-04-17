@@ -43,10 +43,10 @@ const StudentDashboard = () => {
 
   return (
     <div>
-      <TopBar />
+    
       <div className="flex min-h-screen bg-white">
-        {/* Sidebar */}
-        <Sidebar />
+      
+    
 
         {/* Main Content */}
         <div className="flex-1 p-5">
