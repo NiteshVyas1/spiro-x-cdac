@@ -1,17 +1,17 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-const CourseItem = ({ id, name, image }) => {
+const CourseItem = ({ id, name, description, image }) => {
   return (
     <Link to={`/course/${id}`} className="text-gray-700 cursor-pointer">
       <div className="overflow-hidden">
         <img
-          className="hover:scale-110 transition ease-in-out w-full h-40 object-cover rounded-lg"
+          className=" w-full object-cover"
           src={image[0]}
           alt={name}
         />
       </div>
-      <p className="pt-3 pb-1 text-sm font-semibold">{name}</p>
+      <h3 className="pt-3 pb-1 text-md text-black ">{name}</h3>
     </Link>
   );
 };
