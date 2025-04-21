@@ -9,7 +9,6 @@ import ProfilePage from "./pages/ProfilePage";
 import Footer from "./components/Footer";
 import Signup from "./pages/Signup";
 import ResetPassword from "./pages/ResetPassword";
-import GenerateOtp from "./pages/GenerateOtp";
 import VerifyOtp from "./pages/VerifyOtp";
 import TopBar from "./components/TopBar";
 import LecturePage from "./pages/LecturePage";
@@ -27,8 +26,7 @@ const App = () => {
     "/login",
     "/signup",
     "/login/resetpassword",
-    "/generate-otp",
-    "/generate-otp/verify-otp",
+    "/signup/verify-otp",
   ];
 
   const hideLayout = noLayoutRoutes.includes(location.pathname.toLowerCase());
@@ -45,8 +43,7 @@ const App = () => {
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/login/resetpassword" element={<ResetPassword />} />
-          <Route path="/generate-otp" element={<GenerateOtp />} />
-          <Route path="/generate-otp/verify-otp" element={<VerifyOtp />} />
+          <Route path="/signup/verify-otp" element={<VerifyOtp />} />
         </Routes>
       ) : (
         <div className="flex flex-1">
