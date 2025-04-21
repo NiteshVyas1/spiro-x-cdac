@@ -26,7 +26,7 @@ const TopBar = () => {
   }, []);
 
   return (
-    <div className="relative flex items-center justify-between p-4 shadow-md">
+    <div className="relative flex items-center justify-between p-4">
       {/* Left - Logo */}
       <div className="flex items-center">
         <Link to="/" className="flex items-center">

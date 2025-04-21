@@ -1,9 +1,10 @@
 import React from 'react';
 import { useCart } from '../context/CartContext';
 import { toast } from 'react-toastify';
+import { courses } from '../assets/assets';
 
 const Cart = () => {
-  const { cartItems, removeFromCart , clearCart , purchaseCourses} = useCart(); // Access cart data and functions
+  const { cartItems, removeFromCart , purchaseCourses} = useCart(); // Access cart data and functions
 
   const handlePlaceOrder = () => {
     if (cartItems.length > 0) {
@@ -11,7 +12,6 @@ const Cart = () => {
         toast.success(`${item.name} course added to My Courses successfully!`)
       );
       purchaseCourses(cartItems);
-      // clearCart(); // Clear the cart after placing the order
     } else{
       toast.error("Your cart is empty! Please add items to your cart before placing an order.");
     }
@@ -29,27 +29,42 @@ const Cart = () => {
             {cartItems.map((item, index) => (
               <div
                 key={index}
-                className="bg-white rounded-lg shadow-lg p-4 max-w-sm"
+                className="bg-white rounded-lg shadow-lg max-w-sm"
               >
                 <img
                   src={item.image}
                   alt={item.name}
-                  className="w-full h-40 object-cover mb-3 rounded"
+                  className="w-full h-50 object-cover rounded"
                 />
-                <h4 className="font-bold text-lg">{item.name}</h4>
-                <p className="text-sm text-gray-800 mb-2">
+                <div className="pl-2">
+                <h4 className="font-bold text-lg pt-2">{item.name}</h4>
+                <p className="text-sm text-gray-800">
                   By Chembur Computer Institute
                 </p>
-                <p className="text-sm text-gray-800 mb-2">Price:{item.price} </p>
+                
+                {[...Array(5)].map((_, i) => (
+                  <span key={i} className="text-yellow-500 text-lg">
+                    {i < Math.floor(item.rating) ? "★" : "☆"}
+                  </span>
+                ))}
+                <span className="text-md text-gray-600 ml-2">
+                  ({item.rating})
+                </span>
+              
+                <p className="text-md text-gray-800">Price: {item.price} </p>
+                
                 <button
                   onClick={() => removeFromCart(item.name)}
-                  className="bg-red-500 text-white px-3 py-1 rounded hover:bg-red-600 text-xs cursor-pointer"
+                  className="text-gray-800 py-3  rounded hover:text-red-600 text-sm cursor-pointer"
                 >
                   Remove
                 </button>
+                </div>
+
               </div>
             ))}
           </div>
+
 
           {/* Place Order Button */}
           <div className="mt-10">

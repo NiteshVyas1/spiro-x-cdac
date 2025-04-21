@@ -4,9 +4,11 @@ import App from "./App.jsx";
 import { BrowserRouter } from "react-router-dom";
 import ShopContextProvider from "./context/ShopContext.jsx";
 import { CartProvider } from './context/CartContext';
+import { WatchlistProvider } from "./context/WatchlistContext.jsx";
 
 createRoot(document.getElementById("root")).render(
   <BrowserRouter>
+  <WatchlistProvider>
     <CartProvider>
       <ShopContextProvider>
 
@@ -14,5 +16,6 @@ createRoot(document.getElementById("root")).render(
         
       </ShopContextProvider>
     </CartProvider>
+  </WatchlistProvider>
   </BrowserRouter>
 );

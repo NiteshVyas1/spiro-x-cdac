@@ -1,22 +1,36 @@
 import React, { useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import courseVideos from "../assets/courseVideos";
+import { useCart } from "../context/CartContext";
 
 const LecturePage = () => {
   const { courseId, lectureId } = useParams();
   const navigate = useNavigate();
+  const { markAsWatching } = useCart();
+
   const videos = courseVideos[courseId];
+  const currentVideo = videos?.find((v) => v.id === lectureId); // use optional chaining in case videos is undefined
 
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [courseId, lectureId]);
 
-  if (!videos) return <div className="p-10">Course not found.</div>;
+  useEffect(() => {
+    if (currentVideo) {
+      markAsWatching({ ...currentVideo, courseId });
+    }
+  }, [currentVideo, courseId, markAsWatching]);
 
-  const currentVideo = videos.find((v) => v.id === lectureId);
+  if (!videos) return <div className="p-10">Course not found.</div>;
   if (!currentVideo) return <div className="p-10">Lecture not found.</div>;
 
   const previouslyWatched = videos.filter((v) => v.id !== lectureId).slice(0, 3);
+
+
+  if (!videos) return <div className="p-10">Course not found.</div>;
+
+  if (!currentVideo) return <div className="p-10">Lecture not found.</div>;
+
 
   const faqs = [
     { question: "How can I download notes?", answer: "Notes will be available after each lecture." },

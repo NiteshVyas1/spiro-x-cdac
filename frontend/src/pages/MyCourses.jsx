@@ -82,8 +82,6 @@ const MyCourses = () => {
                 />
               </div>
             ))}
-         
-         {console.log("Purchased Courses:", purchasedCourses)}
           
           
         </div>

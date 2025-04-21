@@ -1,59 +1,73 @@
-import React from 'react'
-import { ToastContainer } from 'react-toastify'
+import React from "react";
+import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { Routes, Route, useLocation } from 'react-router-dom';
-import StudentDashboard from './pages/StudentDashboard';
-import CoursePage from './pages/coursepage';
-import Login from './pages/Login';
-import ProfilePage from './pages/ProfilePage';
-import Footer from './components/Footer';
-import Signup from './pages/Signup';
-import ResetPassword from './pages/ResetPassword';
-import GenerateOtp from './pages/GenerateOtp';
-import VerifyOtp from './pages/VerifyOtp';
-import TopBar from './components/TopBar';
-import LecturePage from './pages/LecturePage';
-import PurchasesPage from './pages/PurchasesPage';
-import Sidebar from './components/Sidebar';
-import HistoryPage from './pages/HistoryPage';
-import Cart from './pages/Cart';
-import MyCourses from './pages/MyCourses';
+import { Routes, Route, useLocation } from "react-router-dom";
+import StudentDashboard from "./pages/StudentDashboard";
+import CoursePage from "./pages/coursepage";
+import Login from "./pages/Login";
+import ProfilePage from "./pages/ProfilePage";
+import Footer from "./components/Footer";
+import Signup from "./pages/Signup";
+import ResetPassword from "./pages/ResetPassword";
+import GenerateOtp from "./pages/GenerateOtp";
+import VerifyOtp from "./pages/VerifyOtp";
+import TopBar from "./components/TopBar";
+import LecturePage from "./pages/LecturePage";
+import PurchasesPage from "./pages/PurchasesPage";
+import Sidebar from "./components/Sidebar";
+import HistoryPage from "./pages/HistoryPage";
+import Cart from "./pages/Cart";
+import MyCourses from "./pages/MyCourses";
+import Watchlist from "./pages/Watchlist";
 
 const App = () => {
   const location = useLocation();
+
+  const noLayoutRoutes = [
+    "/login",
+    "/signup",
+    "/login/resetpassword",
+    "/generate-otp",
+    "/generate-otp/verify-otp",
+  ];
+
+  const hideLayout = noLayoutRoutes.includes(location.pathname.toLowerCase());
   const showFooter = location.pathname === "/";
+
   return (
-  <div className="flex flex-col min-h-screen">
-    <ToastContainer 
-            position="top-left"
-            autoClose={2500} 
-            theme='colored'/>
-    <TopBar />
-      <div className="flex flex-1"> 
-        <Sidebar />
-       <Routes>
-    
-        <Route path="/" element={<StudentDashboard />} />
-        <Route path="/course/:id" element={<CoursePage/>} />
-        <Route path="/course/:courseId/:lectureId" element={<LecturePage />} />
-        <Route path="/mycourses" element={<MyCourses />} />
-        <Route path="/history" element={<HistoryPage />} />
-        <Route path="/purchases" element={<PurchasesPage />} />
-        <Route path="/cart" element={<Cart />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/profile" element={<ProfilePage />}/>
-        <Route path="/Signup" element={<Signup/>}/>
-        <Route path="/login/ResetPassword" element={<ResetPassword />} />
-        <Route path="/generate-otp" element={<GenerateOtp />} />
-        <Route path="/generate-otp/verify-otp" element={<VerifyOtp />} />
+    <div className="flex flex-col min-h-screen">
+      <ToastContainer position="top-left" autoClose={2500} theme="colored" />
 
-       </Routes>
-    </div> 
-    
-      {/* Footer - only on home page */}
+      {!hideLayout && <TopBar />}
+
+      {hideLayout ? (
+        <Routes>
+          <Route path="/login" element={<Login />} />
+          <Route path="/signup" element={<Signup />} />
+          <Route path="/login/resetpassword" element={<ResetPassword />} />
+          <Route path="/generate-otp" element={<GenerateOtp />} />
+          <Route path="/generate-otp/verify-otp" element={<VerifyOtp />} />
+        </Routes>
+      ) : (
+        <div className="flex flex-1">
+          <Sidebar />
+          <Routes>
+            <Route path="/" element={<StudentDashboard />} />
+            <Route path="/course/:id" element={<CoursePage />} />
+            <Route path="/course/:courseId/:lectureId" element={<LecturePage />} />
+            <Route path="/mycourses" element={<MyCourses />} />
+            <Route path="/watchlist" element={<Watchlist />} />
+            <Route path="/history" element={<HistoryPage />} />
+            <Route path="/purchases" element={<PurchasesPage />} />
+            <Route path="/cart" element={<Cart />} />
+            <Route path="/profile" element={<ProfilePage />} />
+          </Routes>
+        </div>
+      )}
+
       {showFooter && <Footer />}
-  </div>
-  )
-}
+    </div>
+  );
+};
 
-export default App
+export default App;

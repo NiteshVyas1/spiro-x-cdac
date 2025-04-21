@@ -3,6 +3,7 @@
 
 import React, { createContext, useContext, useState } from 'react';
 import { courses } from '../assets/assets';
+import courseVideos from '../assets/courseVideos';
 
 const CartContext = createContext();
 
@@ -11,6 +12,11 @@ export const useCart = () => useContext(CartContext);
 export const CartProvider = ({ children }) => {
   const [cartItems, setCartItems] = useState([]);
   const [purchasedCourses, setPurchasedCourses] = useState([courses.find(course => course._id === "Python")]);
+
+  const [continueWatching, setContinueWatching] = useState([]);
+  
+
+
 
   const addToCart = (course) => {
     setCartItems(prev => {
@@ -39,11 +45,18 @@ export const CartProvider = ({ children }) => {
   
     clearCart();
   };
+
+  const markAsWatching = (video) => {
+    setContinueWatching((prev) => {
+      if (prev.find((v) => v.id === video.id)) return prev;
+      return [...prev, video];
+    });
+  };
   
 
 
   return (
-    <CartContext.Provider value={{ cartItems, addToCart, removeFromCart , clearCart, purchaseCourses, purchasedCourses }}>
+    <CartContext.Provider value={{ cartItems, addToCart, removeFromCart , clearCart, purchaseCourses, purchasedCourses , markAsWatching, continueWatching }}>
       {children}
     </CartContext.Provider>
   );

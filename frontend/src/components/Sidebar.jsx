@@ -18,13 +18,13 @@ const Sidebar = () => {
   const location = useLocation();
   const { cartItems } = useCart();
   return (
-    <div className="w-64 shadow-lg p-5 min-h-screen">
-      <ul className="py-2 space-y-4">
+    <div className="w-64 p-5 min-h-screen">
+      <ul className="px-3 space-y-3 ">
         <li
-          className={`flex items-center space-x-3 cursor-pointer hover:text-blue-600
+          className={`flex items-center space-x-3 cursor-pointer hover:bg-gray-200 pt-2 pb-2 pl-2 rounded-md
             ${
               location.pathname === "/"
-                ? "underline font-semibold text-blue-600"
+                ? " bg-gray-200 rounded-md"
                 : ""
             }`}
         >
@@ -34,10 +34,10 @@ const Sidebar = () => {
         </li>
 
         <li
-          className={`flex items-center space-x-3 cursor-pointer hover:text-blue-600
+          className={`flex items-center space-x-3 cursor-pointer hover:bg-gray-200 pt-2 pb-2 pl-2 rounded-md
             ${
               location.pathname === "/mycourses"
-                ? "underline font-semibold text-blue-600"
+                ? "bg-gray-200 rounded-md"
                 : ""
             }`}
         >
@@ -50,10 +50,10 @@ const Sidebar = () => {
         </li>
 
         <li
-          className={`flex items-center space-x-3 cursor-pointer hover:text-blue-600
+          className={`flex items-center space-x-3 cursor-pointer hover:bg-gray-200 pt-2 pb-2 pl-2 rounded-md
             ${
               location.pathname === "/purchases"
-                ? "underline font-semibold text-blue-600"
+                ? "bg-gray-200 rounded-md"
                 : ""
             }`}
         >
@@ -66,10 +66,10 @@ const Sidebar = () => {
         </li>
 
         <li
-          className={`flex items-center space-x-3 cursor-pointer hover:text-blue-600
+          className={`flex items-center space-x-3 cursor-pointer hover:bg-gray-200 pt-2 pb-2 pl-2 rounded-md
             ${
               location.pathname === "/history"
-                ? "underline font-semibold text-blue-600"
+                ? "bg-gray-200 rounded-md"
                 : ""
             }`}
         >
@@ -79,10 +79,10 @@ const Sidebar = () => {
         </li>
 
         <li
-          className={`flex items-center space-x-3 cursor-pointer hover:text-blue-600
+          className={`flex items-center space-x-3 cursor-pointer hover:bg-gray-200 pt-2 pb-2 pl-2 rounded-md
             ${
               location.pathname === "/watchlist"
-                ? "underline font-semibold text-blue-600"
+                ? "bg-gray-200 rounded-md"
                 : ""
             }`}
         >
@@ -92,15 +92,15 @@ const Sidebar = () => {
         </li>
 
 
-        <li className="flex items-center space-x-3 cursor-pointer hover:text-blue-600">
+        <li className="flex items-center space-x-3 cursor-pointer hover:bg-gray-200 pt-2 pb-2 pl-2 rounded-md">
           <FaTrophy /> <span>Achievements</span>
         </li>
 
-        <li className="flex items-center space-x-3 cursor-pointer hover:text-blue-600">
+        <li className="flex items-center space-x-3 cursor-pointer hover:bg-gray-200 pt-2 pb-2 pl-2 rounded-md">
           <FaCode /> <span>Code Compiler</span>
         </li>
 
-        <li className="flex items-center space-x-3 cursor-pointer hover:text-blue-600">
+        <li className="flex items-center space-x-3 cursor-pointer hover:bg-gray-200 pt-2 pb-2 pl-2 rounded-md">
           <FaComments /> <span>Chatbox</span>
         </li>
       </ul>
