@@ -56,7 +56,7 @@ const Login = () => {
   };
 
   return (
-    <div className="flex min-h-screen">
+    <div className="flex w-full flex-col md:flex-row h-screen">
       <div className="w-[40%] bg-indigo-800"></div>
 
       <div className="w-[60%] flex items-center justify-center bg-white">
@@ -108,7 +108,7 @@ const Login = () => {
 
             <p className="text-sm text-center">
               Don’t have an account?{" "}
-              <Link to="/Signup" className="text-blue-600">
+              <Link to="/signup" className="text-blue-600">
                 Create an account
               </Link>
             </p>

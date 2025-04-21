@@ -45,7 +45,7 @@ const ResetPassword = () => {
   };
 
   return (
-    <div className="flex h-screen">
+    <div className="flex h-screen w-full">
       {/* Left - Blue Section */}
       <div className="w-[40%] bg-[#372D8A]"></div>
 

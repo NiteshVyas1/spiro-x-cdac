@@ -9,12 +9,9 @@ import ProfilePage from './pages/ProfilePage';
 import Footer from './components/Footer';
 import Signup from './pages/Signup';
 import ResetPassword from './pages/ResetPassword';
-import GenerateOtp from './pages/GenerateOtp';
 import VerifyOtp from './pages/VerifyOtp';
-import TopBar from './components/TopBar';
 import LecturePage from './pages/LecturePage';
 import PurchasesPage from './pages/PurchasesPage';
-import Sidebar from './components/Sidebar';
 import HistoryPage from './pages/HistoryPage';
 import Cart from './pages/Cart';
 import MyCourses from './pages/MyCourses';
@@ -28,9 +25,9 @@ const App = () => {
             position="top-left"
             autoClose={2500} 
             theme='colored'/>
-    <TopBar />
+  
       <div className="flex flex-1"> 
-        <Sidebar />
+        
        <Routes>
     
         <Route path="/" element={<StudentDashboard />} />
@@ -42,10 +39,9 @@ const App = () => {
         <Route path="/cart" element={<Cart />} />
         <Route path="/login" element={<Login />} />
         <Route path="/profile" element={<ProfilePage />}/>
-        <Route path="/Signup" element={<Signup/>}/>
+        <Route path="/signup" element={<Signup/>}/>
         <Route path="/login/ResetPassword" element={<ResetPassword />} />
-        <Route path="/generate-otp" element={<GenerateOtp />} />
-        <Route path="/generate-otp/verify-otp" element={<VerifyOtp />} />
+        <Route path="/signup/verify-otp" element={<VerifyOtp />} />
 
        </Routes>
     </div> 
