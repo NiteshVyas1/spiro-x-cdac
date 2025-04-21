@@ -5,7 +5,6 @@ import { FaLinkedin } from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { toast } from "react-toastify";
-import { Navigate } from "react-router-dom";
 
 const Signup = () => {
   const navigate = useNavigate();
@@ -35,12 +34,14 @@ const Signup = () => {
 
       console.log("Registration response:", response.data);
 
-      if (response.data.token) {
-        localStorage.setItem("token", response.data.token);
-        toast.success("Registration successful!");
-        navigate("/login");
+      if (response.data.success) {
+        toast.success(response.data.message || "OTP sent. Please verify.");
+        localStorage.setItem("otpId", response.data.otpId);
+        localStorage.setItem("pendingEmail", email);
+
+        navigate("/Signup/verify-otp", { state: { email } });
       } else {
-        toast.error(response.data.message);
+        toast.error(response.data.message || "Registration failed.");
       }
     } catch (error) {
       console.error("Error during registration:", error);
@@ -51,7 +52,7 @@ const Signup = () => {
   };
 
   return (
-    <div className="flex min-h-screen">
+    <div className="flex min-h-screen w-full">
       {/* Left - Blue Panel (40%) */}
       <div className="w-[40%] bg-indigo-800"></div>
 
