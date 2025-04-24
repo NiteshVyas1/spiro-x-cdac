@@ -39,7 +39,7 @@ const Signup = () => {
         localStorage.setItem("otpId", response.data.otpId);
         localStorage.setItem("pendingEmail", email);
 
-        navigate("/Signup/verify-otp", { state: { email } });
+        navigate("/signup/verify-otp", { state: { email } });
       } else {
         toast.error(response.data.message || "Registration failed.");
       }

@@ -26,8 +26,7 @@ const App = () => {
     "/login",
     "/signup",
     "/login/resetpassword",
-    "/generate-otp",
-    "/generate-otp/verify-otp",
+    "/signup/verify-otp",
   ];
 
   const hideLayout = noLayoutRoutes.includes(location.pathname.toLowerCase());
