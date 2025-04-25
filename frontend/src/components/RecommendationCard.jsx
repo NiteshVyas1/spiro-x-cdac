@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { toast } from "react-toastify";
 import { useCart } from "../context/CartContext";
 import { assets, courses } from "../assets/assets";
+import axios from "axios";
 
 const recommendations = [
   {

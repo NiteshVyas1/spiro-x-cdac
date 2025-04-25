@@ -44,6 +44,10 @@ const Cart = () => {
     razorpay.open();
   };
 
+  useEffect(() => {
+    fetchCart();
+  }, []);
+
   return (
     <div className="p-6 flex flex-col lg:flex-row gap-10 min-h-screen">
       {/* Cart Items */}
