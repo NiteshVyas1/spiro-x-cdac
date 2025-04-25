@@ -5,9 +5,8 @@ const ProfileCourseOveriew = () => {
 
 
     const courses = [
-        { name: 'C', icon: <Code />, progress: 100 },
-        { name: 'C++', icon: <Code2 />, progress: 100 },
-        { name: 'Python', icon: <Sigma />, progress: 100 },
+        { name: 'C++', icon: <Code2 />, progress: 75 },
+        { name: 'Python', icon: <Sigma />, progress: 80 },
     ];
 
   return (

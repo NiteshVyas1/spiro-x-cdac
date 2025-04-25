@@ -3,7 +3,6 @@ import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import crypto from "crypto";
 import nodemailer from "nodemailer";
-
 import userModel from "../model/userModel.js";
 import Profile from "../model/profileModel.js";
 import OTP from "../model/otpModel.js"; // Updated OTP model
@@ -181,7 +180,7 @@ const verifyOtp = async (req, res) => {
     const hashedPassword = await bcrypt.hash(otpRecord.password, salt);
 
     const newUser = new userModel({
-      name: otpRecord.name,
+      name: otpRecord.name, 
       email: otpRecord.email,
       password: hashedPassword,
     });
@@ -342,6 +341,32 @@ const updateUserProfile = async (req, res) => {
   }
 };
 
+// Route to save purchased courses
+// Save purchased courses to DB
+// const savePurchasedCourses = async (req, res) => {
+//   try {
+//     const { userId, courses } = req.body;
+
+//     const user = await User.findById(userId);
+//     if (!user) return res.status(404).json({ message: "User not found" });
+
+//     // Merge previous courses with new ones (avoid duplicates)
+//     const existingCourseIds = user.purchasedCourses || [];
+//     const newUniqueCourses = courses.filter(
+//       (c) => !existingCourseIds.includes(c._id)
+//     );
+
+//     user.purchasedCourses = [...existingCourseIds, ...newUniqueCourses];
+//     await user.save();
+
+//     res.status(200).json({ message: "Purchased courses saved successfully", purchasedCourses: user.purchasedCourses });
+//   } catch (error) {
+//     console.error("Error saving purchased courses:", error);
+//     res.status(500).json({ message: "Server error" });
+//   }
+// };
+
+
 export {
   loginUser,
   registerUser,
@@ -350,4 +375,5 @@ export {
   resetPassword,
   getUserProfile,
   updateUserProfile,
+  //savePurchasedCourses,
 };

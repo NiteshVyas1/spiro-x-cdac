@@ -68,6 +68,19 @@ const Sidebar = () => {
         <li
           className={`flex items-center space-x-3 cursor-pointer hover:bg-gray-200 pt-2 pb-2 pl-2 rounded-md
             ${
+              location.pathname === "/watchlist"
+                ? "bg-gray-200 rounded-md"
+                : ""
+            }`}
+        >
+          <Link to="/watchlist" className="flex items-center gap-2 w-full h-full">
+            <FaHeart /> <span>Watchlist</span>
+          </Link>
+        </li>
+
+        <li
+          className={`flex items-center space-x-3 cursor-pointer hover:bg-gray-200 pt-2 pb-2 pl-2 rounded-md
+            ${
               location.pathname === "/history"
                 ? "bg-gray-200 rounded-md"
                 : ""
@@ -81,13 +94,13 @@ const Sidebar = () => {
         <li
           className={`flex items-center space-x-3 cursor-pointer hover:bg-gray-200 pt-2 pb-2 pl-2 rounded-md
             ${
-              location.pathname === "/watchlist"
+              location.pathname === "/quiz"
                 ? "bg-gray-200 rounded-md"
                 : ""
             }`}
         >
-          <Link to="/watchlist" className="flex items-center gap-2 w-full h-full">
-            <FaHeart /> <span>Watchlist</span>
+          <Link to="/quiz" className="flex items-center gap-2 w-full h-full">
+            <FaCode /> <span>Quiz</span>
           </Link>
         </li>
 
@@ -96,9 +109,6 @@ const Sidebar = () => {
           <FaTrophy /> <span>Achievements</span>
         </li>
 
-        <li className="flex items-center space-x-3 cursor-pointer hover:bg-gray-200 pt-2 pb-2 pl-2 rounded-md">
-          <FaCode /> <span>Code Compiler</span>
-        </li>
 
         <li className="flex items-center space-x-3 cursor-pointer hover:bg-gray-200 pt-2 pb-2 pl-2 rounded-md">
           <FaComments /> <span>Chatbox</span>

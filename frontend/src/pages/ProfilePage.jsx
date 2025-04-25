@@ -5,9 +5,11 @@ import ProfileCourseOveriew from "../components/ProfileCourseOveriew";
 import ProfileCertificationStatus from "../components/ProfileCertificationStatus";
 import TopBar from "../components/TopBar";
 
+
 const ProfilePage = () => {
   return (
     <div>
+      <TopBar />
       <div className="flex min-h-screen bg-gray-100 p-4 space-x-4">
         <ProfileSideBar />
         <div className="flex-1 space-y-4">

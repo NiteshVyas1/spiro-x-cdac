@@ -1,25 +1,32 @@
-import React, { useEffect, useState } from 'react';
-import { toast } from 'react-toastify';
-import axios from 'axios';
-import { useCart } from '../context/CartContext';
-import { courses } from '../assets/assets';
+// Cart.jsx
+
+import React, { useState, useEffect } from "react";
+import { useCart } from "../context/CartContext";
+import { toast } from "react-toastify";
+import axios from "axios";
+import { courses } from "../assets/assets";
 
 const Cart = () => {
-  const { purchaseCourses } = useCart();
+  const { removeFromCart, purchaseCourses } = useCart();
   const [cartItems, setCartItems] = useState([]);
 
-  const userId = localStorage.getItem("userId"); // Assuming userId is saved at login/signup
+  const totalAmount = cartItems.reduce(
+    (sum, course) => sum + parseInt(course.price.replace("₹", "")),
+    0
+  );
 
   const fetchCart = async () => {
     try {
-      const response = await axios.post("http://localhost:4000/api/cart/get", { userId });
-      console.log(response.data.cartData);
+      const userId = localStorage.getItem("userId");
+      const response = await axios.post("http://localhost:4000/api/cart/get", {
+        userId,
+      });
+
       const cartData = response.data.cartData || {};
 
-      // Match itemIds from cartData to course details
-      const cartCourses = Object.keys(cartData).map(itemId => {
-        return courses.find(course => course._id === itemId);
-      }).filter(course => course !== undefined);
+      const cartCourses = Object.keys(cartData)
+        .map((itemId) => courses.find((course) => course._id === itemId))
+        .filter((course) => course !== undefined);
 
       setCartItems(cartCourses);
     } catch (error) {
@@ -28,32 +35,35 @@ const Cart = () => {
     }
   };
 
-  const handleRemove = async (itemId) => {
-    try {
-      const response = await axios.post("http://localhost:4000/api/cart/removeFromCart", { userId, itemId });
-
-      if (response.data.success) {
-        toast.success("Course removed from cart.");
-        fetchCart(); // refresh cart after removal
-      } else {
-        toast.error("Failed to remove course.");
-      }
-    } catch (error) {
-      console.error(error);
-      toast.error("Error removing course.");
+  const handleRazorpayPayment = () => {
+    if (cartItems.length === 0) {
+      toast.error("Your cart is empty!");
+      return;
     }
-  };
 
-  const handlePlaceOrder = () => {
-    if (cartItems.length > 0) {
-      cartItems.forEach(item => {
-        toast.success(`${item.name} course added to My Courses successfully!`);
-      });
-      purchaseCourses(cartItems);
-      setCartItems([]); // Clear cart locally after placing order
-    } else {
-      toast.error("Your cart is empty! Please add items to your cart before placing an order.");
-    }
+    const options = {
+      key: import.meta.env.VITE_RAZORPAY_KEY,
+      amount: totalAmount * 100,
+      currency: "INR",
+      name: "Chembur Computer Institute",
+      description: "Course Purchase",
+      handler: function (response) {
+        toast.success("Payment Successful!");
+        console.log("Payment ID:", response.razorpay_payment_id);
+        purchaseCourses(cartItems);
+      },
+      prefill: {
+        name: "John Doe",
+        email: "john@example.com",
+        contact: "9999999999",
+      },
+      theme: {
+        color: "#1D4ED8",
+      },
+    };
+
+    const razorpay = new window.Razorpay(options);
+    razorpay.open();
   };
 
   useEffect(() => {
@@ -61,39 +71,45 @@ const Cart = () => {
   }, []);
 
   return (
-    <div className="p-6 flex-1 min-h-screen">
-      <h2 className="text-2xl font-bold mb-6 underline">Your Cart</h2>
-
-      {cartItems.length === 0 ? (
-        <p className="text-gray-600">Your cart is empty.</p>
-      ) : (
-        <>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+    <div className="p-6 flex flex-col lg:flex-row gap-10 min-h-screen">
+      {/* Cart Items */}
+      <div className="flex-1">
+        <h2 className="text-2xl font-bold mb-6 underline">Your Cart</h2>
+        {cartItems.length === 0 ? (
+          <p className="text-gray-600">Your cart is empty.</p>
+        ) : (
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
             {cartItems.map((item, index) => (
               <div
                 key={index}
-                className="bg-white rounded-lg shadow-lg max-w-sm"
+                className="bg-white rounded-lg shadow-lg overflow-hidden"
               >
                 <img
                   src={item.image}
                   alt={item.name}
-                  className="w-full h-50 object-cover rounded"
+                  className="w-full h-48 object-cover"
                 />
-                <div className="pl-2">
-                  <h4 className="font-bold text-lg pt-2">{item.name}</h4>
-                  <p className="text-sm text-gray-800">By Chembur Computer Institute</p>
-                  {[...Array(5)].map((_, i) => (
-                    <span key={i} className="text-yellow-500 text-lg">
-                      {i < Math.floor(item.rating) ? "★" : "☆"}
+                <div className="p-4">
+                  <h4 className="font-bold text-lg">{item.name}</h4>
+                  <p className="text-sm text-gray-700">
+                    By Chembur Computer Institute
+                  </p>
+                  <div className="flex items-center gap-2 my-2">
+                    {[...Array(5)].map((_, i) => (
+                      <span key={i} className="text-yellow-500">
+                        {i < Math.floor(item.rating) ? "★" : "☆"}
+                      </span>
+                    ))}
+                    <span className="text-sm text-gray-500">
+                      ({item.rating})
                     </span>
-                  ))}
-                  <span className="text-md text-gray-600 ml-2">
-                    ({item.rating})
-                  </span>
-                  <p className="text-md text-gray-800">Price: {item.price}</p>
+                  </div>
+                  <p className="font-semibold text-gray-800">
+                    Price: {item.price}
+                  </p>
                   <button
-                    onClick={() => handleRemove(item._id)}
-                    className="text-gray-800 py-3 rounded hover:text-red-600 text-sm cursor-pointer"
+                    onClick={() => removeFromCart(item.name)}
+                    className="mt-2 text-red-500 hover:underline text-sm"
                   >
                     Remove
                   </button>
@@ -101,17 +117,38 @@ const Cart = () => {
               </div>
             ))}
           </div>
+        )}
+      </div>
 
-          {/* Place Order Button */}
-          <div className="mt-10">
-            <button
-              onClick={handlePlaceOrder}
-              className="bg-blue-500 text-white px-6 py-3 rounded hover:bg-blue-600 text-md cursor-pointer"
-            >
-              Place Your Order
-            </button>
-          </div>
-        </>
+      {/* Order Summary */}
+      {cartItems.length > 0 && (
+        <div className="bg-white shadow-lg p-6 rounded-lg h-fit border border-gray-200 w-full lg:w-1/3 mt-14">
+          <h3 className="text-xl font-semibold mb-4">Order Summary</h3>
+          <p className="text-gray-700 mb-2">
+            Total Courses:{" "}
+            <span className="font-bold">{cartItems.length}</span>
+          </p>
+
+          <ul className="mb-4 text-sm text-gray-800 space-y-1">
+            {cartItems.map((item, index) => (
+              <li key={index} className="flex justify-between">
+                <span>{item.name}</span>
+                <span>{item.price}</span>
+              </li>
+            ))}
+          </ul>
+          <p className="text-gray-700 mb-4">
+            Total Price:{" "}
+            <span className="font-bold text-green-600">₹{totalAmount}</span>
+          </p>
+
+          <button
+            onClick={handleRazorpayPayment}
+            className="w-full bg-blue-600 hover:bg-blue-700 text-white py-2 rounded-lg mt-4 cursor-pointer transition duration-200"
+          >
+            Pay
+          </button>
+        </div>
       )}
     </div>
   );

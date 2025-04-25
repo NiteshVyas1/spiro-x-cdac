@@ -22,7 +22,7 @@ import WatchlistIcon from "./WatchlistIcon";
         <img
           src={thumbnail}
           alt={title}
-          className="w-full h-40 object-cover group-hover:blur-sm transition duration-300"
+          className="w-full h-50 object-cover group-hover:blur-sm transition duration-300"
         />
         <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition duration-300">
           <PlayCircleIcon className="text-white w-15 h-15" />
