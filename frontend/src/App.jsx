@@ -3,7 +3,7 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { Routes, Route, useLocation } from "react-router-dom";
 import StudentDashboard from "./pages/StudentDashboard";
-import CoursePage from "./pages/coursepage";
+import CoursePage from "./pages/CoursePage";
 import Login from "./pages/Login";
 import ProfilePage from "./pages/ProfilePage";
 import Footer from "./components/Footer";
@@ -18,6 +18,7 @@ import HistoryPage from "./pages/HistoryPage";
 import Cart from "./pages/Cart";
 import MyCourses from "./pages/MyCourses";
 import Watchlist from "./pages/Watchlist";
+import QuizPage from "./pages/QuizPage";
 
 const App = () => {
   const location = useLocation();
@@ -27,6 +28,8 @@ const App = () => {
     "/signup",
     "/login/resetpassword",
     "/signup/verify-otp",
+    "/profile",
+  
   ];
 
   const hideLayout = noLayoutRoutes.includes(location.pathname.toLowerCase());
@@ -44,6 +47,8 @@ const App = () => {
           <Route path="/signup" element={<Signup />} />
           <Route path="/login/resetpassword" element={<ResetPassword />} />
           <Route path="/signup/verify-otp" element={<VerifyOtp />} />
+          <Route path="/profile" element={<ProfilePage />} />
+
         </Routes>
       ) : (
         <div className="flex flex-1">
@@ -57,7 +62,9 @@ const App = () => {
             <Route path="/history" element={<HistoryPage />} />
             <Route path="/purchases" element={<PurchasesPage />} />
             <Route path="/cart" element={<Cart />} />
-            <Route path="/profile" element={<ProfilePage />} />
+            <Route path="/quiz" element={<QuizPage />} />
+
+
           </Routes>
         </div>
       )}

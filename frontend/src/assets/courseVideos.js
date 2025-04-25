@@ -1,5 +1,6 @@
 import { assets } from "./assets";
 import pythonIntroVideo from './videos/python-intro.mp4';
+import pythonFunctions from './videos/python-functions.mp4';
 
 const courseVideos = {
   c: [
@@ -39,7 +40,7 @@ const courseVideos = {
       duration: '18 min',
       level: 'Intermediate',
       thumbnail: assets.python,
-      videoUrl: '/videos/python-functions.mp4',
+      videoUrl: pythonFunctions,
     },
   ],
   Java: [

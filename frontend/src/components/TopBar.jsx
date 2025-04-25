@@ -30,7 +30,11 @@ const TopBar = () => {
       {/* Left - Logo */}
       <div className="flex items-center">
         <Link to="/" className="flex items-center">
-          <img src={assets.spiro} alt="spiro logo" className="h-20 w-40 cursor-pointer" />
+          <img
+            src={assets.spiro_edu}
+            alt="spiro logo"
+            className="h-20 w-40 cursor-pointer pl-2"
+          />
         </Link>
       </div>
 
@@ -64,24 +68,29 @@ const TopBar = () => {
 
         {/* Dropdown Menu */}
         {dropdownOpen && (
-          <div className="absolute right-0 top-14 w-60 bg-white shadow-lg rounded-lg border z-50">
+          <div className="absolute right-0 top-14 w-60 bg-white shadow-lg rounded-lg border border-gray-500 z-50 pd-2">
             <div className="p-4 border-b flex flex-col items-center space-y-2">
               <div className="w-10 h-10 bg-blue-600 text-white flex items-center justify-center rounded-full text-sm font-semibold">
                 {userInitial || "U"}
               </div>
               <p className="font-medium">{userName || "Loading..."}</p>
-              <p className="text-sm text-gray-500">{userEmail || "Loading..."}</p>
+              <p className="text-sm text-gray-500">
+                {userEmail || "Loading..."}
+              </p>
             </div>
-            <ul className="divide-y">
+            <ul className="divide-y text-gray-800">
+              <Link to="/profile">
+                <li className="p-1 hover:bg-gray-100 cursor-pointer">
+                  Profile
+                </li>
+              </Link>
+              <hr />
               <li className="p-1 hover:bg-gray-100 cursor-pointer">Settings</li>
               <li className="p-1 hover:bg-gray-100 cursor-pointer">Appearance</li>
               <li className="p-1 hover:bg-gray-100 cursor-pointer">Payments</li>
               <li className="p-1 hover:bg-gray-100 cursor-pointer">Help</li>
               <li className="p-1 hover:bg-gray-100 cursor-pointer">Feedback</li>
-              <Link to="/profile">
-                <li className="p-1 hover:bg-gray-100 cursor-pointer">Profile</li>
-              </Link>
-              <li className="p-1 hover:bg-gray-100 cursor-pointer text-red-500">Logout</li>
+              <li className="p-1 hover:bg-gray-100 cursor-pointer">Logout</li>
             </ul>
           </div>
         )}

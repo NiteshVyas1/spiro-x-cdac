@@ -8,14 +8,12 @@ import { WatchlistProvider } from "./context/WatchlistContext.jsx";
 
 createRoot(document.getElementById("root")).render(
   <BrowserRouter>
-  <WatchlistProvider>
-    <CartProvider>
+    <WatchlistProvider>
       <ShopContextProvider>
-
-        <App />
-        
+        <CartProvider>
+          <App />
+        </CartProvider>
       </ShopContextProvider>
-    </CartProvider>
-  </WatchlistProvider>
+    </WatchlistProvider>
   </BrowserRouter>
 );

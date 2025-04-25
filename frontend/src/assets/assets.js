@@ -5,11 +5,13 @@ import java from "./java.png";
 import web from "./web.png";
 import genAI from "./genAI.png";
 import online_learning from "./online_learning_gif.gif";
+import spiro_edu from "./spiro_edu.png";
 
 export const assets = {
   c,
   python,
   spiro,
+  spiro_edu,
   java,
   web,
   genAI,

@@ -46,7 +46,14 @@ const LecturePage = () => {
           <div className="flex-1">
             <div className="bg-white p-4 rounded-lg shadow-lg border border-gray-200 mb-6">
               <h2 className="text-xl font-bold mb-4">{currentVideo.title}</h2>
-              <video controls className="w-full rounded-lg mb-4" src={currentVideo.videoUrl} />
+              <video 
+              controls 
+              autoPlay 
+              muted 
+              className="w-full rounded-lg mb-4" src={currentVideo.videoUrl}
+              controlsList="nodownload"
+              onContextMenu={(e) => e.preventDefault()}
+               />
               <div>
                 <h3 className="font-semibold">Description</h3>
                 <p className="text-gray-700">{currentVideo.description}</p>

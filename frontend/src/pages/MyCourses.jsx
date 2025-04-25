@@ -1,39 +1,4 @@
-// import React from 'react';
-// import CourseItem from '../components/CourseItem';
-// import { courses } from '../assets/assets';
-// import { useLocation } from 'react-router-dom';
-
-// const MyCourses = () => {
-//   const location = useLocation();
-
-//   // Conditional heading based on pathname
-//   const renderHeading = () => {
-//     if (location.pathname === '/') {
-//       return <h3 className="text-xl font-semibold mb-4 text-gray-800">My Courses</h3>;
-//     } else {
-//       return <h2 className="text-2xl font-bold mb-6 underline">My Courses</h2>;
-//     }
-//   };
-
-//   return (
-//     <div className={`mt-6 ${location.pathname === '/' ? '' : 'pl-6'}`}>
-//       {renderHeading()}
-      
-//       <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-5 gap-y-6">
-//         {courses.map((course, index) => (
-//           <div
-//             key={index}
-//             className="overflow-hidden shadow-sm rounded-lg border border-gray-300 hover:shadow-lg transform hover:scale-103 cursor-pointer"
-//           >
-//             <CourseItem id={course._id} image={course.image} name={course.name} />
-//           </div>
-//         ))}
-//       </div>
-//     </div>
-//   );
-// };
-
-// export default MyCourses;
+// MyCourses.jsx
 
 import React from 'react';
 import CourseItem from '../components/CourseItem';
@@ -82,7 +47,6 @@ const MyCourses = () => {
                 />
               </div>
             ))}
-          
           
         </div>
       )}

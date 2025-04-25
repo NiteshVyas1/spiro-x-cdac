@@ -8,7 +8,7 @@ const Footer = () => {
         {/* Logo */}
         <div>
           <img
-            src={assets.spiro}
+            src={assets.spiro_edu}
             alt="spiro logo"
             className="h-20 w-40 bg"
           />

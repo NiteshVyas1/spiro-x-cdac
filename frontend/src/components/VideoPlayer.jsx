@@ -23,14 +23,15 @@ const VideoPlayer = () => {
         <h1 className="text-2xl font-bold mb-4 text-blue-700">
           {currentVideo.title}
         </h1>
-
         <video
           controls
           autoPlay
+          muted
           className="w-full h-[60vh] rounded-lg mb-4 border"
           src={currentVideo.videoUrl}
+          controlsList="nodownload"
+          onContextMenu={(e) => e.preventDefault()}
         />
-
         <p className="text-gray-600 mb-4">{currentVideo.description}</p>
 
         <div className="flex justify-between items-center">
