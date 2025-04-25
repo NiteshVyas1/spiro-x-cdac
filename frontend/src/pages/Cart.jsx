@@ -13,6 +13,7 @@ const Cart = () => {
   const fetchCart = async () => {
     try {
       const response = await axios.post("http://localhost:4000/api/cart/get", { userId });
+      console.log(response.data.cartData);
       const cartData = response.data.cartData || {};
 
       // Match itemIds from cartData to course details

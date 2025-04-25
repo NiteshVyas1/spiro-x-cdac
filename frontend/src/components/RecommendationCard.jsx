@@ -37,31 +37,36 @@ const RecommendationCard = () => {
 
   const visibleRecommendations = showAll ? recommendations : recommendations.slice(0, 3);
 
-  // const handleBuy = (course) => {
-  //   addToCart(course);
-  //   toast.success(`${course.name} course added to cart!`);
-  // };
-
-
+  const fetchCart = async () => {
+    try {
+      const userId = localStorage.getItem("userId");
+      const response = await axios.post("http://localhost:4000/api/cart/get", { userId });
+      console.log(response.data.cartData);
+    } catch (error) {
+      console.error(error);
+      toast.error("Failed to load cart.");
+    }
+  };
 
   const handleBuy = async (course) => {
     try {
       const fullCourse = courses.find((c) => c.name === course.name);
-  
+
       if (!fullCourse) {
         toast.error("Course not found in list.");
         return;
       }
-  
-      const userId = localStorage.getItem("userId"); // Assuming userId is stored locally
-  
-      const response = await axios.post("http://1oca1host:4000/api/cart/add", {
+
+      const userId = localStorage.getItem("userId");
+
+      const response = await axios.post("http://localhost:4000/api/cart/add", {
         userId,
-        itemId: fullCourse._id,  // your course must have an _id field
+        itemId: fullCourse._id, 
       });
-  
+
       if (response.data.success) {
         toast.success(`${fullCourse.name} added to cart!`);
+        fetchCart(); // Fetch the updated cart data after adding
       } else {
         toast.error("Failed to add course to cart.");
       }
@@ -70,22 +75,20 @@ const RecommendationCard = () => {
       toast.error("Something went wrong while adding course.");
     }
   };
-  
-  
 
   return (
     <section className="mt-12">
-  <div className="flex justify-between items-center mb-6">
-    <h3 className="text-xl font-semibold text-gray-800">Popular Courses For You!</h3>
-    {recommendations.length > 3 && (
-      <button
-        className="text-lg text-gray-900 hover:text-blue-700"
-        onClick={() => setShowAll(!showAll)}
-      >
-        {showAll ? "View Less" : "View All >"}
-      </button>
-    )}
-  </div>
+      <div className="flex justify-between items-center mb-6">
+        <h3 className="text-xl font-semibold text-gray-800">Popular Courses For You!</h3>
+        {recommendations.length > 3 && (
+          <button
+            className="text-lg text-gray-900 hover:text-blue-700"
+            onClick={() => setShowAll(!showAll)}
+          >
+            {showAll ? "View Less" : "View All >"}
+          </button>
+        )}
+      </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
         {visibleRecommendations.map((course, index) => (
