@@ -33,7 +33,7 @@ const TopBar = () => {
           <img
             src={assets.spiro_edu}
             alt="spiro logo"
-            className="h-20 w-40 cursor-pointer pl-2"
+            className="h-10 w-20 md:h-20 md:w-40 cursor-pointer pl-2"
           />
         </Link>
       </div>

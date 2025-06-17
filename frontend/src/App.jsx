@@ -51,7 +51,7 @@ const App = () => {
 
         </Routes>
       ) : (
-        <div className="flex flex-1">
+        <div className="flex flex-1 flex-col md:flex-row">
           <Sidebar />
           <Routes>
             <Route path="/" element={<StudentDashboard />} />
