@@ -7,7 +7,7 @@ import axios from "axios";
 import { courses } from "../assets/assets";
 
 const Cart = () => {
-  const { removeFromCart, purchaseCourses } = useCart();
+  const { purchaseCourses } = useCart();
   const [cartItems, setCartItems] = useState([]);
 
   const totalAmount = cartItems.reduce(
@@ -35,40 +35,86 @@ const Cart = () => {
     }
   };
 
-  const handleRazorpayPayment = () => {
-    if (cartItems.length === 0) {
-      toast.error("Your cart is empty!");
-      return;
-    }
+ const handleRazorpayPayment = () => {
+  if (cartItems.length === 0) {
+    toast.error("Your cart is empty!");
+    return;
+  }
 
-    const options = {
-      key: import.meta.env.VITE_RAZORPAY_KEY,
-      amount: totalAmount * 100,
-      currency: "INR",
-      name: "Chembur Computer Institute",
-      description: "Course Purchase",
-      handler: function (response) {
-        toast.success("Payment Successful!");
-        console.log("Payment ID:", response.razorpay_payment_id);
-        purchaseCourses(cartItems);
-      },
-      prefill: {
-        name: "John Doe",
-        email: "john@example.com",
-        contact: "9999999999",
-      },
-      theme: {
-        color: "#1D4ED8",
-      },
-    };
+  const options = {
+    key: import.meta.env.VITE_RAZORPAY_KEY,
+    amount: totalAmount * 100,
+    currency: "INR",
+    name: "Chembur Computer Institute",
+    description: "Course Purchase",
+    handler: async function (response) {
+      toast.success("Payment Successful!");
+      console.log("Payment ID:", response.razorpay_payment_id);
 
-    const razorpay = new window.Razorpay(options);
-    razorpay.open();
+      // Grant access to purchased courses
+      purchaseCourses(cartItems);
+
+      try {
+        const userId = localStorage.getItem("userId");
+
+        // Clear cart on backend
+        await axios.post("http://localhost:4000/api/cart/clear", { userId });
+
+        // Clear cart in frontend
+        setCartItems([]);
+
+        
+      } catch (error) {
+        console.error("Failed to clear cart:", error);
+        toast.error("Payment done, but cart clearing failed.");
+      }
+    },
+    prefill: {
+      name: "John Doe",
+      email: "john@example.com",
+      contact: "9999999999",
+    },
+    theme: {
+      color: "#1D4ED8",
+    },
   };
+
+  const razorpay = new window.Razorpay(options);
+  razorpay.open();
+};
+
 
   useEffect(() => {
     fetchCart();
   }, []);
+
+  const handleRemove = async (course) => {
+  try {
+    const fullCourse = courses.find((c) => c.name === course.name);
+    if (!fullCourse) {
+      toast.error("Course not found in list.");
+      return;
+    }
+
+    const userId = localStorage.getItem("userId");
+
+    const response = await axios.post("http://localhost:4000/api/cart/remove", {
+      userId,
+      itemId: fullCourse._id,
+    });
+
+    if (response.data.success) {
+      toast.success(`${fullCourse.name} course removed from cart!`);
+      fetchCart(); // refresh cart data
+    } else {
+      toast.error("Failed to remove course from cart.");
+    }
+  } catch (error) {
+    console.error(error);
+    toast.error("Something went wrong while removing course.");
+  }
+};
+
 
   return (
     <div className="p-6 flex flex-col lg:flex-row gap-10 min-h-screen">
@@ -108,7 +154,7 @@ const Cart = () => {
                     Price: {item.price}
                   </p>
                   <button
-                    onClick={() => removeFromCart(item.name)}
+                    onClick={() => handleRemove(item)}
                     className="mt-2 text-red-500 hover:underline text-sm"
                   >
                     Remove

@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { assets } from "../assets/assets";
+import { assets, courses } from "../assets/assets";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { useCart } from "../context/CartContext";
@@ -8,16 +8,15 @@ import MyCourses from "./MyCourses";
 import ContinuePlaying from "../components/ContinuePlaying";
 import WelcomeCard from "../components/WelcomeCard";
 import RecommendationCard from "../components/RecommendationCard";
+import axios from "axios";
 
 const StudentDashboard = () => {
   const { userName } = useContext(ShopContext);
-  const { addToCart } = useCart();
+  
   const navigate = useNavigate();
 
-  const handleBuy = (course) => {
-    addToCart(course);
-    toast.success(`${course.name} course added to cart!`);
-  };
+ 
+ 
 
   const recommendations = [
     {

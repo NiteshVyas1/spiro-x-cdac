@@ -18,16 +18,9 @@ export const CartProvider = ({ children }) => {
 
   const { userId } = useContext(ShopContext); // ✅ Fetch userId from global context
   
-  const addToCart = (course) => {
-    setCartItems(prev => {
-      if (prev.find(item => item.name === course.name)) return prev;
-      return [...prev, course];
-    });
-  };
+ 
 
-  const removeFromCart = (courseName) => {
-    setCartItems(prev => prev.filter(item => item.name !== courseName));
-  };
+
 
   const clearCart = () => setCartItems([]);
 
@@ -91,7 +84,7 @@ export const CartProvider = ({ children }) => {
 
 
   return (
-    <CartContext.Provider value={{ cartItems, addToCart, removeFromCart , clearCart, purchaseCourses, purchasedCourses , markAsWatching, continueWatching }}>
+    <CartContext.Provider value={{ cartItems,   clearCart, purchaseCourses, purchasedCourses , markAsWatching, continueWatching }}>
       {children}
     </CartContext.Provider>
   );

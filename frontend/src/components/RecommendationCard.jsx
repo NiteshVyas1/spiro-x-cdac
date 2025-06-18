@@ -38,7 +38,7 @@ const recommendations = [
 ];
 
 const RecommendationCard = () => {
-  const { addToCart, purchasedCourses } = useCart();
+  const {  purchasedCourses } = useCart();
   const [showAll, setShowAll] = useState(false);
 
   const filteredRecommendations = recommendations.filter(
@@ -83,7 +83,7 @@ const RecommendationCard = () => {
           price: course.price,
           rating: course.rating,
         };
-        addToCart(enrichedCourse);
+        
         toast.success(`${enrichedCourse.name} course added to cart!`);
         fetchCart();
       } else {
