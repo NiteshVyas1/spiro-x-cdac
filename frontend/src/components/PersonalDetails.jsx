@@ -79,117 +79,117 @@ const PersonalDetails = () => {
   };
 
   return (
-    <div className="bg-white rounded-lg shadow p-6 mr-20">
-      <div className="flex justify-between items-center mb-4">
-        <h2 className="text-lg font-semibold">Personal detail</h2>
+    <div className="bg-white rounded-lg shadow p-6 max-w-4xl mx-auto">
+      <div className="flex justify-between items-center mb-6">
+        <h2 className="text-2xl font-semibold text-gray-900">Personal Details</h2>
         {!editing && (
-          <Pencil className="w-4 h-4 text-gray-500 cursor-pointer" onClick={handleEditClick} />
+          <Pencil className="w-5 h-5 text-gray-600 cursor-pointer hover:text-blue-600 transition-colors duration-200" onClick={handleEditClick} />
         )}
       </div>
 
-      <div className="grid grid-cols-2 gap-y-4 gap-x-8 text-sm">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 text-sm">
         {!editing ? (
           <>
             <div>
-              <span className="text-gray-500">Name</span>
-              <p>{userName || "Student"}</p>
+              <span className="text-gray-500 uppercase tracking-wide">Name</span>
+              <p className="mt-1 text-gray-900">{userName || "Student"}</p>
             </div>
             <div>
-              <span className="text-gray-500">College Email</span>
-              <p>{userEmail || "Student Email"}</p>
+              <span className="text-gray-500 uppercase tracking-wide">College Email</span>
+              <p className="mt-1 text-gray-900">{userEmail || "Student Email"}</p>
             </div>
             <div>
-              <span className="text-gray-500">Phone</span>
-              <p>{phone || "Not Provided"}</p>
+              <span className="text-gray-500 uppercase tracking-wide">Phone</span>
+              <p className="mt-1 text-gray-900">{phone || "Not Provided"}</p>
             </div>
             <div>
-              <span className="text-gray-500">Branch</span>
-              <p>{branch || "Not Provided"}</p>
+              <span className="text-gray-500 uppercase tracking-wide">Branch</span>
+              <p className="mt-1 text-gray-900">{branch || "Not Provided"}</p>
             </div>
             <div>
-              <span className="text-gray-500">Age</span>
-              <p>{age || "Not Provided"}</p>
+              <span className="text-gray-500 uppercase tracking-wide">Age</span>
+              <p className="mt-1 text-gray-900">{age || "Not Provided"}</p>
             </div>
             <div>
-              <span className="text-gray-500">Education</span>
-              <p>{education || "Not Provided"}</p>
+              <span className="text-gray-500 uppercase tracking-wide">Education</span>
+              <p className="mt-1 text-gray-900">{education || "Not Provided"}</p>
             </div>
             <div>
-              <span className="text-gray-500">Github</span>
-              <p>{github || "Not Provided"}</p>
+              <span className="text-gray-500 uppercase tracking-wide">Github</span>
+              <p className="mt-1 text-blue-600 underline cursor-pointer">{github || "Not Provided"}</p>
             </div>
             <div>
-              <span className="text-gray-500">LinkedIn</span>
-              <p>{linkedin || "Not Provided"}</p>
+              <span className="text-gray-500 uppercase tracking-wide">LinkedIn</span>
+              <p className="mt-1 text-blue-600 underline cursor-pointer">{linkedin || "Not Provided"}</p>
             </div>
           </>
         ) : (
           <>
             <div>
-              <label className="text-gray-500">Phone</label>
+              <label className="text-gray-500 uppercase tracking-wide">Phone</label>
               <input
                 type="text"
                 value={phone}
                 onChange={(e) => setPhone(e.target.value)}
-                className="w-full border border-gray-300 px-3 py-2 rounded-md"
+                className="w-full border border-gray-300 px-3 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
               />
             </div>
             <div>
-              <label className="text-gray-500">Branch</label>
+              <label className="text-gray-500 uppercase tracking-wide">Branch</label>
               <input
                 type="text"
                 value={branch}
                 onChange={(e) => setBranch(e.target.value)}
-                className="w-full border border-gray-300 px-3 py-2 rounded-md"
+                className="w-full border border-gray-300 px-3 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
               />
             </div>
             <div>
-              <label className="text-gray-500">Age</label>
+              <label className="text-gray-500 uppercase tracking-wide">Age</label>
               <input
                 type="number"
                 value={age}
                 onChange={(e) => setAge(e.target.value)}
-                className="w-full border border-gray-300 px-3 py-2 rounded-md"
+                className="w-full border border-gray-300 px-3 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
               />
             </div>
             <div>
-              <label className="text-gray-500">Education</label>
+              <label className="text-gray-500 uppercase tracking-wide">Education</label>
               <input
                 type="text"
                 value={education}
                 onChange={(e) => setEducation(e.target.value)}
-                className="w-full border border-gray-300 px-3 py-2 rounded-md"
+                className="w-full border border-gray-300 px-3 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
               />
             </div>
             <div>
-              <label className="text-gray-500">Github Link</label>
+              <label className="text-gray-500 uppercase tracking-wide">Github Link</label>
               <input
                 type="text"
                 value={github}
                 onChange={(e) => setGithub(e.target.value)}
-                className="w-full border border-gray-300 px-3 py-2 rounded-md"
+                className="w-full border border-gray-300 px-3 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
               />
             </div>
             <div>
-              <label className="text-gray-500">LinkedIn Link</label>
+              <label className="text-gray-500 uppercase tracking-wide">LinkedIn Link</label>
               <input
                 type="text"
                 value={linkedin}
                 onChange={(e) => setLinkedin(e.target.value)}
-                className="w-full border border-gray-300 px-3 py-2 rounded-md"
+                className="w-full border border-gray-300 px-3 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
               />
             </div>
 
-            <div className="flex space-x-4 mt-4">
+            <div className="flex space-x-4 mt-6">
               <button
                 onClick={handleSaveClick}
-                className="bg-blue-600 text-white py-2 px-4 rounded-md"
+                className="bg-blue-600 text-white py-2 px-6 rounded-md hover:bg-blue-700 transition-colors duration-200"
               >
                 Save
               </button>
               <button
                 onClick={handleCancelClick}
-                className="text-gray-500 py-2 px-4 rounded-md hover:bg-blue-600 hover:text-white transition duration-300"
+                className="text-gray-500 py-2 px-6 rounded-md hover:bg-blue-600 hover:text-white transition duration-300"
               >
                 Cancel
               </button>

@@ -12,7 +12,7 @@ import axios from "axios";
 
 const StudentDashboard = () => {
   const { userName } = useContext(ShopContext);
-  
+  const { addToCart, continueWatching, purchasedCourses } = useCart();
   const navigate = useNavigate();
 
  
@@ -44,11 +44,11 @@ const StudentDashboard = () => {
       {/* Welcome Card */}
       <WelcomeCard />
 
-      {/* Continue Playing */}
-      <ContinuePlaying />
+      {/* Continue Playing - Only show if user has watched videos */}
+      {continueWatching.length > 0 && <ContinuePlaying />}
 
-      {/* My Courses */}
-      <MyCourses />
+      {/* My Courses - Only show if user has purchased courses */}
+      {purchasedCourses.length > 0 && <MyCourses />}
 
       {/* Our Offerings */}
       <RecommendationCard />
@@ -57,3 +57,4 @@ const StudentDashboard = () => {
 };
 
 export default StudentDashboard;
+

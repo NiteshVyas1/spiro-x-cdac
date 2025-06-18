@@ -11,6 +11,5 @@ userRouter.put('/update-profile/:userid', authUser ,updateUserProfile)
 userRouter.get('/get-profile/:userId', getUserProfile) 
 userRouter.post('/verify-otp', verifyOtp);
 userRouter.post("/resend-otp", resendOtp);
-//userRouter.post("/purchase/:userid", savePurchasedCourses); // Route to save purchased courses
 
 export default userRouter;

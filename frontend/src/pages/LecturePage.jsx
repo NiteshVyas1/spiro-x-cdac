@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import courseVideos from "../assets/courseVideos";
 import { useCart } from "../context/CartContext";
+import VideoPlayer from "../components/VideoPlayer";
 
 const LecturePage = () => {
   const { courseId, lectureId } = useParams();
@@ -9,7 +10,7 @@ const LecturePage = () => {
   const { markAsWatching } = useCart();
 
   const videos = courseVideos[courseId];
-  const currentVideo = videos?.find((v) => v.id === lectureId); // use optional chaining in case videos is undefined
+  const currentVideo = videos?.find((v) => v.id === lectureId);
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -26,16 +27,10 @@ const LecturePage = () => {
 
   const previouslyWatched = videos.filter((v) => v.id !== lectureId).slice(0, 3);
 
-
-  if (!videos) return <div className="p-10">Course not found.</div>;
-
-  if (!currentVideo) return <div className="p-10">Lecture not found.</div>;
-
-
   const faqs = [
     { question: "How can I download notes?", answer: "Notes will be available after each lecture." },
     { question: "Can I rewatch lectures?", answer: "Yes, you can watch lectures as many times as you like." },
-    { question: "Is there a certificate?", answer: "Yes, on course completion, you’ll receive a certificate." },
+    { question: "Is there a certificate?", answer: "Yes, on course completion, you'll receive a certificate." },
   ];
 
   return (
@@ -46,14 +41,11 @@ const LecturePage = () => {
           <div className="flex-1">
             <div className="bg-white p-4 rounded-lg shadow-lg border border-gray-200 mb-6">
               <h2 className="text-xl font-bold mb-4">{currentVideo.title}</h2>
-              <video 
-              controls 
-              autoPlay 
-              muted 
-              className="w-full rounded-lg mb-4" src={currentVideo.videoUrl}
-              controlsList="nodownload"
-              onContextMenu={(e) => e.preventDefault()}
-               />
+              
+              <div className="w-full rounded-lg mb-4">
+                <VideoPlayer />
+              </div>
+              
               <div>
                 <h3 className="font-semibold">Description</h3>
                 <p className="text-gray-700">{currentVideo.description}</p>

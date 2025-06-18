@@ -1,11 +1,11 @@
 import c from "./c.png";
 import python from "./python.png";
-import spiro from "./spiro.png";
+import spiro from "./spiro_.png";
 import java from "./java.png";
 import web from "./web.png";
 import genAI from "./genAI.png";
 import online_learning from "./online_learning_gif.gif";
-import spiro_edu from "./spiro_edu.png";
+import spiro_edu from "./spiro_.png";
 
 export const assets = {
   c,

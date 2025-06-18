@@ -30,7 +30,7 @@ const Login = () => {
         }
       );
 
-      console.log("Login response:", response.data);
+      // console.log("Login response:", response.data);
 
       if (response.data.success) {
         setToken(response.data.token); // Store token in context and localStorage
