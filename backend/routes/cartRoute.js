@@ -5,7 +5,7 @@ const cartRouter = express.Router();
 
 cartRouter.post('/get', getUserCart);
 cartRouter.post('/add', addToCart);
-cartRouter.post('/remove', removeFromCart); // <-- fixed here
+cartRouter.post('/remove', removeFromCart);
 cartRouter.post("/clear", clearCart);
 
 

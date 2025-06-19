@@ -47,12 +47,12 @@ const TopBar = () => {
 
   return (
     <div className="sticky top-0 z-60 bg-white">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-8xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           {/* Logo Section */}
           <div className="flex items-center">
             <Link to="/" className="flex items-center">
-              <img src={assets.spiro} alt="Logo" className="h-15 w-auto" />
+              <img src={assets.spiro} alt="Logo" className="h-15 w-auto " />
             </Link>
           </div>
 
