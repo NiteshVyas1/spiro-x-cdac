@@ -1,14 +1,12 @@
-// MyCourses.jsx
-
 import React from 'react';
 import CourseItem from '../components/CourseItem';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { useCart } from '../context/CartContext';
-import { courses } from '../assets/assets';
 
 const MyCourses = () => {
   const { purchasedCourses } = useCart();
   const location = useLocation();
+  const navigate = useNavigate();
 
   // Conditional heading based on pathname
   const renderHeading = () => {
@@ -34,7 +32,7 @@ const MyCourses = () => {
       {purchasedCourses.length === 0 ? (
         <p className="text-gray-600">You haven't purchased any courses yet.</p>
       ) : (
-        <div className="grid grid-cols-3 md:grid-cols-3 lg:grid-cols-3 gap-5 gap-y-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5 gap-y-6">
           {purchasedCourses.map((course, index) => (
               <div
                 key={index}
@@ -45,6 +43,12 @@ const MyCourses = () => {
                   name={course.name}
                   image={course.image}
                 />
+                <button
+                  className="mt-2 px-5 py-2 border border-white bg-transparent text-white font-medium rounded-lg hover:bg-white hover:text-blue-500 transition duration-300 cursor-pointer"
+                  onClick={() => navigate("/purchases")}
+                >
+                  View Details
+                </button>
               </div>
             ))}
           
@@ -55,5 +59,3 @@ const MyCourses = () => {
 };
 
 export default MyCourses;
-
-

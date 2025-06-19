@@ -8,7 +8,9 @@ import userRouter from "./routes/userRoute.js"
 import cartRouter from "./routes/cartRoute.js"
 import paymentRouter from "./routes/paymentRoute.js"
 import historyRouter from './routes/historyRoute.js'
+
 import videoProgressRouter from './routes/videoProgressRoute.js'
+import feedbackRouter from './routes/feedbackRoute.js'
 
 
 // App Config
@@ -28,6 +30,8 @@ app.use('/api/cart', cartRouter)
 app.use('/api/payment', paymentRouter);
 app.use('/api/history', historyRouter);
 app.use('/api/progress', videoProgressRouter);
+
+app.use('/api/feedback', feedbackRouter);
 
 app.get('/',(req,res)=>{
     res.send("API Working")

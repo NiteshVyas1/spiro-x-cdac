@@ -19,6 +19,8 @@ import Cart from "./pages/Cart";
 import MyCourses from "./pages/MyCourses";
 import Watchlist from "./pages/Watchlist";
 import QuizPage from "./pages/QuizPage";
+import FeedbackPage from "./pages/FeedbackPage";
+import HelpPage from "./pages/HelpPage";
 
 const App = () => {
   const location = useLocation();
@@ -29,6 +31,8 @@ const App = () => {
     "/login/resetpassword",
     "/signup/verify-otp",
     "/profile",
+    "/feedback",
+    "/help",
   
   ];
 
@@ -48,6 +52,8 @@ const App = () => {
           <Route path="/login/resetpassword" element={<ResetPassword />} />
           <Route path="/signup/verify-otp" element={<VerifyOtp />} />
           <Route path="/profile" element={<ProfilePage />} />
+          <Route path="/feedback" element={<FeedbackPage />} />
+          <Route path="/help" element={<HelpPage />} />
 
         </Routes>
       ) : (

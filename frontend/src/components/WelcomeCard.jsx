@@ -20,7 +20,7 @@ const WelcomeCard = () => {
             grow smarter every day.
           </p>
           <button
-            className="mt-2 px-5 py-2 bg-white text-blue-600 font-medium rounded-lg hover:bg-blue-700 hover:text-white transition duration-300 cursor-pointer"
+            className="mt-2 px-5 py-2 border border-white bg-blue-500 text-white font-medium rounded-lg hover:bg-white hover:text-blue-500 transition duration-300 cursor-pointer"
             onClick={() => navigate("/purchases")}
           >
             Explore New Courses

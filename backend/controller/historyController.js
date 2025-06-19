@@ -1,43 +1,44 @@
 import mongoose from 'mongoose';
+import History from '../model/historyModel.js';
 
 // History Schema
-const historySchema = new mongoose.Schema({
-  userId: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'User',
-    required: true
-  },
-  courseId: {
-    type: String,
-    required: true
-  },
-  lectureId: {
-    type: String,
-    required: true
-  },
-  title: {
-    type: String,
-    required: true
-  },
-  thumbnail: {
-    type: String,
-    required: true
-  },
-  duration: {
-    type: String,
-    required: true
-  },
-  watchedAt: {
-    type: Date,
-    default: Date.now
-  }
-});
+// const historySchema = new mongoose.Schema({
+//   userId: {
+//     type: mongoose.Schema.Types.ObjectId,
+//     ref: 'User',
+//     required: true
+//   },
+//   courseId: {
+//     type: String,
+//     required: true
+//   },
+//   lectureId: {
+//     type: String,
+//     required: true
+//   },
+//   title: {
+//     type: String,
+//     required: true
+//   },
+//   thumbnail: {
+//     type: String,
+//     required: true
+//   },
+//   duration: {
+//     type: String,
+//     required: true
+//   },
+//   watchedAt: {
+//     type: Date,
+//     default: Date.now
+//   }
+// });
 
 // Compound index to prevent duplicates and enable efficient queries
-historySchema.index({ userId: 1, courseId: 1, lectureId: 1 }, { unique: true });
-historySchema.index({ userId: 1, watchedAt: -1 });
+// historySchema.index({ userId: 1, courseId: 1, lectureId: 1 }, { unique: true });
+// historySchema.index({ userId: 1, watchedAt: -1 });
 
-const History = mongoose.model('History', historySchema);
+// const History = mongoose.model('History', historySchema);
 
 // Add video to history
 export const addToHistory = async (req, res) => {

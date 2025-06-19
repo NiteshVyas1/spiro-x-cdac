@@ -7,6 +7,8 @@ import Searchbar from "../components/Searchbar";
 import { assets } from "../assets/assets";
 import { useCart } from "../context/CartContext";
 import { toast } from "react-toastify";
+// import FeedbackPage from './pages/FeedbackPage';
+// import HelpPage from './pages/HelpPage';
 
 const TopBar = () => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
@@ -31,20 +33,20 @@ const TopBar = () => {
     // Clear token and userId from context
     setToken(null);
     setUserId(null);
-    
+
     // Clear from localStorage
     localStorage.removeItem('token');
     localStorage.removeItem('userId');
-    
+
     // Show success message
     toast.success("Logged out successfully!");
-    
+
     // Redirect to login page
     navigate("/login");
   };
 
   return (
-    <div className="sticky top-0 z-50 bg-white">
+    <div className="sticky top-0 z-60 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           {/* Logo Section */}
@@ -138,26 +140,37 @@ const TopBar = () => {
                       <span className="text-gray-700 group-hover:text-blue-600">Appearance</span>
                     </div>
 
-                    <div className="px-4 py-3 hover:bg-blue-50 flex items-center space-x-3 cursor-pointer group transition-colors duration-200">
+                    {/* Help menu item */}
+                    <Link to='/help' className="px-4 py-3 hover:bg-blue-50 flex items-center space-x-3 cursor-pointer group transition-colors duration-200">
                       <div className="w-9 h-9 rounded-full bg-blue-100 flex items-center justify-center text-blue-600 group-hover:bg-blue-200 transition-colors duration-200">
                         <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
                           <path d="M4 4a2 2 0 00-2 2v1h16V6a2 2 0 00-2-2H4z" />
                           <path fillRule="evenodd" d="M18 9H2v5a2 2 0 002 2h12a2 2 0 002-2V9zM4 13a1 1 0 011-1h1a1 1 0 110 2H5a1 1 0 01-1-1zm5-1a1 1 0 100 2h1a1 1 0 100-2H9z" clipRule="evenodd" />
                         </svg>
                       </div>
-                      <span className="text-gray-700 group-hover:text-blue-600">Help & Feedback</span>
-                    </div>
+                      <span className="text-gray-700 group-hover:text-blue-600">Help</span>
+                    </Link>
 
-                    {/* Logout Button */}
-                    <div onClick={handleLogout} className="mt-2 border-t">
-                      <div className="px-4 py-3 hover:bg-red-50 flex items-center space-x-3 cursor-pointer group transition-colors duration-200">
-                        <div className="w-9 h-9 rounded-full bg-red-100 flex items-center justify-center text-red-600 group-hover:bg-red-200 transition-colors duration-200">
-                          <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                            <path fillRule="evenodd" d="M3 3a1 1 0 00-1 1v12a1 1 0 102 0V4a1 1 0 00-1-1zm10.293 9.293a1 1 0 001.414 1.414l3-3a1 1 0 000-1.414l-3-3a1 1 0 10-1.414 1.414L14.586 9H7a1 1 0 100 2h7.586l-1.293 1.293z" clipRule="evenodd" />
-                          </svg>
-                        </div>
-                        <span className="text-red-600 group-hover:text-red-700 font-medium">Logout</span>
+                    {/* Feedback menu item */}
+                    <Link to='/feedback' className="px-4 py-3 hover:bg-blue-50 flex items-center space-x-3 cursor-pointer group transition-colors duration-200">
+                      <div className="w-9 h-9 rounded-full bg-blue-100 flex items-center justify-center text-blue-600 group-hover:bg-blue-200 transition-colors duration-200">
+                        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                          <path d="M18 10c0 3.314-3.582 6-8 6-.982 0-1.927-.09-2.813-.26-.31-.06-.63.03-.86.24l-2.13 1.93A1 1 0 013 17.13V15.5c0-.28-.11-.55-.3-.75C1.57 13.36 1 11.74 1 10c0-3.314 3.582-6 8-6s8 2.686 8 6z" />
+                        </svg>
                       </div>
+                      <span className="text-gray-700 group-hover:text-blue-600">Feedback</span>
+                    </Link>
+                  </div>
+
+                  {/* Logout Button */}
+                  <div onClick={handleLogout} className="mt-2 border-t">
+                    <div className="px-4 py-3 hover:bg-red-50 flex items-center space-x-3 cursor-pointer group transition-colors duration-200">
+                      <div className="w-9 h-9 rounded-full bg-red-100 flex items-center justify-center text-red-600 group-hover:bg-red-200 transition-colors duration-200">
+                        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                          <path fillRule="evenodd" d="M3 3a1 1 0 00-1 1v12a1 1 0 102 0V4a1 1 0 00-1-1zm10.293 9.293a1 1 0 001.414 1.414l3-3a1 1 0 000-1.414l-3-3a1 1 0 10-1.414 1.414L14.586 9H7a1 1 0 100 2h7.586l-1.293 1.293z" clipRule="evenodd" />
+                        </svg>
+                      </div>
+                      <span className="text-red-600 group-hover:text-red-700 font-medium">Logout</span>
                     </div>
                   </div>
                 </div>
